@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"METHYLPREDNISOLONE (METHYLPREDNISOLONE)",
+		  	"positions":{"department":{"x":666,"y":996}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"COLCHICINE",
+		  	"positions":{"department":{"x":913,"y":774}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"IBUPROFEN (IBUPROFEN)",
+		  	"positions":{"department":{"x":642,"y":604}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"STEOIRDS (STEROIDS)",
+		  	"positions":{"department":{"x":947,"y":637}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"KINERET (ANAKINRA), NOT AVAILABLE",
+		  	"positions":{"department":{"x":866,"y":868}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

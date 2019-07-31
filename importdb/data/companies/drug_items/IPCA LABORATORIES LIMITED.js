@@ -1,0 +1,43 @@
+var scale_domain = 1.4; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"PROPRANOLOL",
+		  	"positions":{"department":{"x":511,"y":698}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":2,
+		  	"budget_2013":2,
+		},{
+			"name":"LEVOXYL (LEVOTHYROXINE)",
+		  	"positions":{"department":{"x":167,"y":549}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"PREMARIN (ESTROGENS CONJUGATED)",
+		  	"positions":{"department":{"x":810,"y":998}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"CITALOPRAM",
+		  	"positions":{"department":{"x":555,"y":328}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"PROPRANOLOL HYDROCHLORIDE",
+		  	"positions":{"department":{"x":642,"y":428}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"POTASSIUM",
+		  	"positions":{"department":{"x":26,"y":778}},
+		  	"id":6,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

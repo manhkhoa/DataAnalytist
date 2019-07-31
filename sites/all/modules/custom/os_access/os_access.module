@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * Check Access 
+ */
+function os_view_chart_access(){
+    global $user;   
+    
+    if ($user->roles['3'] || $user->roles['4']) {
+    	return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+
+?>

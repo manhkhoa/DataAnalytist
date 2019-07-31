@@ -1,0 +1,228 @@
+.g-wrapper {
+  position: relative;
+}
+.g-fallback {
+  position: absolute;
+  top: 19px;
+  left: 14px;
+}
+
+.g-chart {
+  font: 10px sans-serif;
+  margin: 3em 0;
+  position: relative;
+}
+
+.g-crop {
+  border-top: solid 1px #aaa;
+  clear: left;
+  height: 320px;
+  margin-top: -1px;
+  padding: 10px 0;
+}
+
+.g-header {
+  background: #fff;
+  margin-left: -.5em;
+  padding: 0 .5em;
+  position: absolute;
+  text-transform: uppercase;
+  top: -.5em;
+  white-space: nowrap;
+}
+
+.g-scoreboard {
+  border-collapse: collapse;
+  height: 70px;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.g-scoreboard tr {
+  height: 30px;
+  vertical-align: text-bottom;
+}
+
+.g-map .g-scoreboard {
+  height: 50px;
+}
+
+.g-scoreboard tr + tr {
+  border-top: solid 1px #ddd;
+}
+
+.g-scoreboard td {
+  padding: 0;
+}
+
+.g-scoreboard div {
+  position: relative;
+  top: 10px;
+}
+
+.g-scoreboard tr + tr div {
+  top: 3px;
+}
+
+.g-value {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.g-big {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.g-unit {
+  left: .3em;
+}
+
+.g-date {
+  white-space: nowrap;
+}
+
+.g-overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.g-area {
+  shape-rendering: crispEdges;
+}
+
+.g-axis path {
+  display: none;
+}
+
+.g-axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.g-condition,
+.g-map {
+  display: inline-block;
+  position: relative;
+  float: left;
+}
+
+.g-condition {
+  width: 550px;
+  margin-right: 90px;
+}
+
+.g-condition svg {
+  position: absolute;
+}
+
+.g-map {
+  width: 310px;
+}
+
+.g-poor {
+  color: #d0a558;
+  fill: #d0a558;
+}
+
+.g-very.g-poor {
+  color: #926759;
+  fill: #926759;
+}
+
+.g-header,
+.g-grey {
+  color: #aaa;
+}
+
+.g-map .g-moderate {
+  color: #f3c654;
+}
+
+.g-map .g-swatch.g-extreme,
+.g-map .g-division.g-extreme {
+  background: #e36a3b;
+  fill: #e36a3b;
+}
+
+.g-map .g-swatch.g-severe,
+.g-map .g-division.g-severe {
+  background: #e9933e;
+  fill: #e9933e;
+}
+
+.g-map .g-swatch.g-moderate,
+.g-map .g-division.g-moderate {
+  background: #f3c654;
+  fill: #f3c654;
+}
+
+.g-map .g-label {
+  top: 283px;
+  width: 100%;
+  position: absolute;
+}
+
+.g-map image {
+  opacity: .7;
+}
+
+.g-map .g-division {
+  fill: #e5e4dc;
+}
+
+.g-map .g-state {
+  fill: none;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+
+.g-swatch {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  top: 1px;
+  width: 1em;
+}
+
+.g-note {
+  position: absolute;
+  top: 80px;
+  width: 160px;
+}
+
+.g-arrow {
+  position: absolute;
+  border-top: solid 1px #aaa;
+  top: 24px;
+  width: 28px;
+  height: 12px;
+}
+
+.g-arrow.g-left {
+  border-left: solid 1px #aaa;
+}
+
+.g-arrow.g-right {
+  border-right: solid 1px #aaa;
+}
+
+/* Scoop Fixes */
+
+span.noWrap.feedback {
+  white-space: normal;
+}
+
+#main #interactiveFooter {
+  border-top:1px solid #DDDDDD;
+  margin-top:10px;
+  padding-top:12px;
+}
+
+#main div.storyHeader h1 {
+  font-size: 26px;
+  margin-bottom:4px;
+  margin-top:3px;
+}

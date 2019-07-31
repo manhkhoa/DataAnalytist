@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"INTRACEAMERAL AMPHO",
+		  	"positions":{"department":{"x":884,"y":147}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"TOPICAL AMPHO B",
+		  	"positions":{"department":{"x":439,"y":353}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"FLUCONAZOLE",
+		  	"positions":{"department":{"x":697,"y":359}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"CORNEA - IOWA LIONS EYE BANK",
+		  	"positions":{"department":{"x":137,"y":141}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"CORNEA IOWA LIONS EYE BANK",
+		  	"positions":{"department":{"x":428,"y":497}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

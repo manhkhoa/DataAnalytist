@@ -1,0 +1,36 @@
+/*Style Simple Search */
+#edit-type-search{float: left;width: 60%;margin-bottom: 10px;}
+#edit-type-search .form-radio{float: left;}
+#edit-type-search label.option{float: left;}
+#edit-type-search #edit-type-search-1{margin-left: 4%;margin-top: 3px;}
+#edit-type-search #edit-type-search-2{margin-left: 4%;margin-top: 3px;}
+
+#drug-simple-search-form #content-search{float: left;width: 100%;border: 1px solid #bbb;padding-top: 4px;padding-left: 3%;margin-bottom: 9px;}
+#drug-simple-search-form .parent-row{width: 100%;float: left;}
+#drug-simple-search-form .form-item.form-type-textfield .form-text{width: 60%;}
+
+#simple-search-content{float: left;}
+#form-result-simple{float: left;width: 103%;border: 1px solid #bbb;padding-top: 10px;padding-left: 20px;padding-right: 20px;}
+.content_search_drug{float: left;}
+.drug_content{float: left;margin-bottom: 24px;width: 60%;margin-top: 9px;}
+.drug_image{float: left;width: 40%;}
+.drug_image img{width: 72%;height: 100px !important;}
+#name_title{margin-bottom: 10px;}
+
+/*Style view results search*/
+
+
+/*Style All*/
+.form-item.form-type-textfield, .form-item.form-type-select{float: left;width: 50%;}
+.clearfix{clear: both;}
+
+/*Style Adv Search */
+#drug-advance-search-form #content-search{float: left;width: 100%;border: 1px solid #bbb;padding-top: 4px;padding-left: 3%;margin-bottom: 9px;}
+#drug-advance-search-form .parent-row{width: 100%;float: left;}
+#drug-advance-search-form .form-item.form-type-textfield .form-text{width: 80%;}
+#drug-advance-search-form #edit-patient-out{width: 24%;}
+#drug-advance-search-form #end-title-adv{float: right;margin-bottom: 5px;margin-right: 40px;}
+
+#drug-advance-search-form .parent-row .date-wrap { float: left; width: 50%; }
+
+

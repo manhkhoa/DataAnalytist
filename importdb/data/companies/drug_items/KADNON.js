@@ -1,0 +1,29 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"RIBAVIRIN",
+		  	"positions":{"department":{"x":283,"y":612}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":2,
+		  	"budget_2013":2,
+		},{
+			"name":"WELLBUTRIN",
+		  	"positions":{"department":{"x":293,"y":556}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"PEGASYS",
+		  	"positions":{"department":{"x":25,"y":563}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"INCIVEK",
+		  	"positions":{"department":{"x":348,"y":767}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

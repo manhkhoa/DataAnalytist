@@ -1,0 +1,5 @@
+name = OS Core
+description = Including functions which use many times.
+package = OS
+core = "7.x"
+

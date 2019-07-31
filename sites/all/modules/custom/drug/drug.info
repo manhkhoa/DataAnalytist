@@ -1,0 +1,6 @@
+name = Search Drug
+description = Search Drugs Module
+core = 7.x
+package = Custom 
+dependencies[] = user
+

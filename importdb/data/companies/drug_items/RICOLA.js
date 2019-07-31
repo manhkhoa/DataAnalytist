@@ -1,0 +1,43 @@
+var scale_domain = 1.6; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"RICOLA SUGAR FREE SWISS HERB DROPS",
+		  	"positions":{"department":{"x":187,"y":685}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.4,
+		  	"budget_2013":2,
+		},{
+			"name":"RICOLA COUGH DROPS",
+		  	"positions":{"department":{"x":50,"y":728}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.4,
+		  	"budget_2013":2,
+		},{
+			"name":"RICOLA SWEET CHERRY HERB THROAT DROPS SUGAR FREE",
+		  	"positions":{"department":{"x":597,"y":208}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.2,
+		  	"budget_2013":1,
+		},{
+			"name":"CHERATUSSIN AC",
+		  	"positions":{"department":{"x":46,"y":736}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.2,
+		  	"budget_2013":1,
+		},{
+			"name":"RICOLA NATURAL HERB COUGH DROPS (4.9 MG. MENTHOL)",
+		  	"positions":{"department":{"x":935,"y":181}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.2,
+		  	"budget_2013":1,
+		},{
+			"name":"VICODIN",
+		  	"positions":{"department":{"x":609,"y":354}},
+		  	"id":6,
+		  	"budget_2012":1,
+		  	"change":0.2,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

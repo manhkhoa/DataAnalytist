@@ -1,0 +1,22 @@
+<?php
+/**
+ * Implement Hook Menu
+ */
+function drug_menu(){
+	$items = array();
+	$items['oda-search/drug'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('drug_simple_search_form',TRUE),
+		'access callback' => TRUE,
+		'file' => 'drug_simple.inc',
+	); 
+	$items['oda-search/adverse'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('drug_advance_search_form',TRUE),
+		'file' => 'drug_advance.inc',
+		'access callback' => TRUE,
+	);
+	return $items;
+}

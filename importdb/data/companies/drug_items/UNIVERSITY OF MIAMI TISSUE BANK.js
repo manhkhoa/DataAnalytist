@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"CRYOPRESERVED LEFT WHOLE TIBIA WITH PATELLA",
+		  	"positions":{"department":{"x":43,"y":221}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.25,
+		  	"budget_2013":1,
+		},{
+			"name":"ANTIBIOTICS",
+		  	"positions":{"department":{"x":995,"y":596}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.25,
+		  	"budget_2013":1,
+		},{
+			"name":"MUSCULOSKELETAL SOFT TISSUE HUMAN",
+		  	"positions":{"department":{"x":316,"y":863}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.25,
+		  	"budget_2013":1,
+		},{
+			"name":"CRUSHED CANCELLOUS,30CC/MTF/HUMAN ALLOGRAFT",
+		  	"positions":{"department":{"x":754,"y":78}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.25,
+		  	"budget_2013":1,
+		},{
+			"name":"FRESHFROZEN RIGHT HEMIPELVIS",
+		  	"positions":{"department":{"x":481,"y":53}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.25,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

@@ -1,0 +1,36 @@
+var scale_domain = 1.2; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"BEPREVE (BEPOTASTINE BESILATE OPHTHALMIC SOLUTION) 1.5%",
+		  	"positions":{"department":{"x":852,"y":746}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.666666666667,
+		  	"budget_2013":2,
+		},{
+			"name":"ADVAIR",
+		  	"positions":{"department":{"x":816,"y":365}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"SINGULAIR",
+		  	"positions":{"department":{"x":434,"y":194}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"ZYRTEC-D",
+		  	"positions":{"department":{"x":70,"y":700}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"BEPREVE",
+		  	"positions":{"department":{"x":190,"y":809}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

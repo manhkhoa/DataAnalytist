@@ -1,0 +1,29 @@
+var scale_domain = 0.8; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"PREGABALIN",
+		  	"positions":{"department":{"x":7,"y":204}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"METHADONE",
+		  	"positions":{"department":{"x":731,"y":737}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"OXYCODONE",
+		  	"positions":{"department":{"x":383,"y":216}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"ALPRAZOLAM",
+		  	"positions":{"department":{"x":535,"y":73}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

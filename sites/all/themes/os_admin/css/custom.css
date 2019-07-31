@@ -1,0 +1,295 @@
+
+/* ------ CUstom --------- */
+#page-wrapper .content {
+	padding: 10px;
+}
+
+.front #page-wrapper .content {
+	padding: 0px;
+}
+
+svg a:hover {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+svg a:active, svg a:focus {
+	text-decoration: none;
+}
+
+#nytg-nav-all {
+	display: none;
+}
+
+.front #page-title{
+	display: none;
+}
+
+.front .not-front-block{
+	display: none;
+}
+
+.not-front .front-block {
+	display: none;
+}
+
+.col-sm-6.front-block.first{
+	padding-left: 0;
+}
+
+.col-sm-6.front-block.last{
+	padding-right: 0;
+}
+
+.page-heading h1{
+	padding-bottom: 0 !important;
+}
+
+
+.profile {
+	margin: 0 !important;
+}
+
+.col-md-12.front-block {
+	min-height: 0 !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.front #block-circle-chart-adverse-events-chart .col-md-6{
+	padding-left: 0;
+}
+
+.front #block-circle-chart-drug-chart .col-md-6{
+	padding-right: 0;
+}
+
+.scrollable.wrapper .col-md-12 {
+	/*padding: 0;*/
+}
+
+.horizontal-row.row{
+	margin: 0;
+}
+
+.horizontal-row .col-md-12{
+	width: 99% !important;
+}
+
+.scrollable.wrapper h1 {
+	padding-bottom: 15px;
+}
+
+ul.navigation > li > a > span {
+	font-family: "Open Sans",sans-serif;
+	font-size: 13px;
+}
+
+.scrollable.wrapper .row{
+	/*padding: 0 20px 20px 20px;*/
+}
+
+#edit-field-user-id label, #edit-field-contact-name label, #edit-field-contact-email label, #edit-field-contact-phone label, #edit-field-contact-address .form-item-field-contact-address-und-0-country label, #edit-field-contact-address .form-item-field-contact-address-und-0-thoroughfare label {
+	width: 12%;
+}
+
+.form-type-checkbox label {
+	margin: 0;
+}
+
+.form-type-checkbox input {
+	margin: 0;
+}
+
+.addressfield-container-inline > div.form-item{
+	margin-right: 3em !important;
+}
+
+
+.user-online .dropdown-menu.extended {
+    border: medium none !important;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.176) !important;
+    max-width: 200px !important;
+    min-width: 60px !important;
+    padding: 0;
+    top: 73px;
+    left: -100px;
+    width: 157px !important;
+}
+
+.user-online .notify-arrow {
+    border-style: solid;
+    border-width: 0 9px 9px;
+    height: 0;
+    left: 110px;
+    margin-top: 10px;
+    opacity: 1;
+    position: absolute;
+    top: -18px;
+    transition: all 0.25s ease 0s;
+    width: 0;
+    z-index: 10;
+}
+
+.user-online .dropdown-menu.extended li p{
+	text-transform: capitalize;
+}
+
+.user-online .dropdown-menu.extended li.user-name-list div.user-name{
+	text-transform: lowercase;
+	display: block;
+	padding-left: 10px;
+}
+.user-online .dropdown-menu.extended li.user-name-list div.user-name a{
+	color: #747f95;
+	font-size: 14px;
+	border: none !important;
+	padding-left: 5px !important;
+}
+
+
+.user-online a.dropdown-toggle.rightbar-switch {
+    background-color: #ff2c44;
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    height: 41px;
+    line-height: 41px;
+    margin-right: 20px;
+    position: relative;
+    text-align: center;
+    top: 15px;
+    width: 41px;
+}
+
+.user-online .dropdown-menu.extended li.user-name-list div.user-name a:hover {
+	background: #1e293d !important;
+	text-decoration: none !important; 
+	color: #fff;
+}
+
+.user-online .dropdown-menu.extended li.user-name-list div.user-name .fa {
+    color: #19b698;
+}
+
+.user-online .dropdown-menu.extended li.user-name-list {
+	background: #1e293d;
+}
+
+.scrollable .col-sm-6.front-block p.company-name.number-drug{
+	font-size: 20px;
+}
+
+
+.scrollable .col-sm-6.front-block h1.company-name.number-drug{
+	padding-bottom: 7px !important;
+}
+
+
+.scrollable .col-sm-6.front-block p.number-event-title{
+	margin-bottom: 5px;
+}
+
+
+/* -------- Responsive ------- */
+@media (min-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */
+	.col-sm-6.front-block {
+    	padding-left: 0;
+    	padding-right: 0;
+	} 
+
+	.front #block-circle-chart-drug-chart .col-md-6 {
+	    padding-right: 0;
+	    padding-left: 0;
+	}
+}
+
+@media (min-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+	.col-sm-6.front-block {
+    	padding-left: 0;
+    	padding-right: 0;
+	} 
+
+	.front #block-circle-chart-drug-chart .col-md-6 {
+	    padding-right: 0;
+	    padding-left: 0;
+	}
+}
+
+
+@media (min-width:737px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+	.col-sm-6.front-block {
+    	padding-left: 5px;
+    	padding-right: 5px;
+	} 
+
+	.col-sm-6.front-block.second {
+    	padding-right: 0px;
+	} 
+
+	.col-sm-6.front-block.third {
+    	padding-left: 0px;
+	}
+
+	.front #block-circle-chart-drug-chart .col-md-6 {
+	    padding-right: 0;
+	    padding-left: 0;
+	}
+}
+
+
+
+@media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
+	.col-sm-6.front-block {
+    	padding-left: 5px;
+    	padding-right: 5px;
+	}  
+
+	.col-sm-6.front-block.second {
+    	padding-right: 5px;
+	} 
+
+	.col-sm-6.front-block.third {
+    	padding-left: 5px;
+	}
+
+	.front #block-circle-chart-drug-chart .col-md-6 {
+	    padding-right: 0;
+	    padding-left: 0;
+	}
+
+	.scrollable .col-sm-6.front-block p.company-name.number-drug {
+	    font-size: 16px;
+	}
+
+	.scrollable .col-sm-6.front-block p.company-name.number-drug.drug-name {
+	    padding-bottom: 5px;
+	}
+
+	.col-sm-6.front-block p.number-event-title.drug {
+	    padding-bottom: 15px;
+	}
+
+}
+
+
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */
+	.col-sm-6.front-block {
+    	padding-left: 5px;
+    	padding-right: 5px;
+	}  
+
+	.col-sm-6.front-block.second {
+    	padding-right: 5px;
+	} 
+
+	.col-sm-6.front-block.third {
+    	padding-left: 5px;
+	}
+
+	.front #block-circle-chart-drug-chart .col-md-6 {
+	    padding-right: 0;
+	    padding-left: 0;
+	}
+}

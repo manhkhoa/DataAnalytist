@@ -1,0 +1,43 @@
+var scale_domain = 1.6; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"GILENYA",
+		  	"positions":{"department":{"x":516,"y":149}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.428571428571,
+		  	"budget_2013":3,
+		},{
+			"name":"GILENYA (FINGOLIMOD) CAPSULE",
+		  	"positions":{"department":{"x":802,"y":745}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.142857142857,
+		  	"budget_2013":1,
+		},{
+			"name":"EXJADE",
+		  	"positions":{"department":{"x":680,"y":753}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.142857142857,
+		  	"budget_2013":1,
+		},{
+			"name":"GLEEVEC (IMATINIB) UNKNOWN",
+		  	"positions":{"department":{"x":315,"y":515}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.142857142857,
+		  	"budget_2013":1,
+		},{
+			"name":"GILENYA (FTY) CAPSULE, 0.5MG",
+		  	"positions":{"department":{"x":636,"y":598}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.142857142857,
+		  	"budget_2013":1,
+		},{
+			"name":"NEURONTIN (GABAPENTIN)",
+		  	"positions":{"department":{"x":638,"y":539}},
+		  	"id":6,
+		  	"budget_2012":1,
+		  	"change":0.142857142857,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

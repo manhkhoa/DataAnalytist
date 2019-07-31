@@ -1,0 +1,6 @@
+name = Graphic Chart
+description = Statistic data with graphics
+core = 7.x
+package = Chart 
+dependencies[] = chart
+

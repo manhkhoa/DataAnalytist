@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"ALCOHOL",
+		  	"positions":{"department":{"x":157,"y":927}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"INSTANT HAND SANITIZING WIPES",
+		  	"positions":{"department":{"x":385,"y":704}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"SANI-HANDS 65.9% ETHYL ALCOHOL",
+		  	"positions":{"department":{"x":549,"y":217}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"BETADINE",
+		  	"positions":{"department":{"x":502,"y":94}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"PREVANTICS SWABSTICK",
+		  	"positions":{"department":{"x":340,"y":302}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

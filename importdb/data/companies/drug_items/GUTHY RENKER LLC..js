@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"MULTIVITAMINS DAILY",
+		  	"positions":{"department":{"x":651,"y":463}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"OIL FREE MOISTURIZER SPF",
+		  	"positions":{"department":{"x":607,"y":87}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"PROACTIV REFINING MASK",
+		  	"positions":{"department":{"x":854,"y":121}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"PROACTIVE REPAIRING TREATMENT",
+		  	"positions":{"department":{"x":824,"y":866}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"PROACTIV RENEWING CLEANSER",
+		  	"positions":{"department":{"x":222,"y":44}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

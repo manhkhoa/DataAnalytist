@@ -1,0 +1,6 @@
+name = Bubble Chart
+description = Bubble Chart Module
+core = 7.x
+package = Chart
+dependencies[] = chart 
+

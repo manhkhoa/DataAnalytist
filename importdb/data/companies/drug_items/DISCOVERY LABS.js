@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"NITROUS OXIDE (NITROUS OXIDE)",
+		  	"positions":{"department":{"x":439,"y":537}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"DOPAMINE (DOPAMINE)",
+		  	"positions":{"department":{"x":291,"y":828}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"GENTAMYCIN (GENTAMYCIN)",
+		  	"positions":{"department":{"x":862,"y":62}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"AMPICILLIN (AMPICILLIN)",
+		  	"positions":{"department":{"x":259,"y":534}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"SURFAXIN",
+		  	"positions":{"department":{"x":764,"y":102}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

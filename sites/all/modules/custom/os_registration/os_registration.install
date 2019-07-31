@@ -1,0 +1,9 @@
+<?php
+/**
+ * Implement Hook_schema
+ */
+function gp_registration_schema(){
+	
+  return $schema;
+}
+?>

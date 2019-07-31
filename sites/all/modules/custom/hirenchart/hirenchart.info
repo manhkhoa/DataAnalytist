@@ -1,0 +1,6 @@
+name = Hierarchie Chart
+description = Hierarchie Chart Module
+core = 7.x
+package = Chart
+dependencies[] = chart 
+

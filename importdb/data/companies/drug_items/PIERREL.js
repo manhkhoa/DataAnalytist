@@ -1,0 +1,29 @@
+var scale_domain = 0.8; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"ARTICAINE\EPINEPHRINE",
+		  	"positions":{"department":{"x":165,"y":117}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"MEDROL",
+		  	"positions":{"department":{"x":231,"y":664}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"AMOXICILLIN",
+		  	"positions":{"department":{"x":677,"y":723}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"ORABLOC",
+		  	"positions":{"department":{"x":738,"y":84}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

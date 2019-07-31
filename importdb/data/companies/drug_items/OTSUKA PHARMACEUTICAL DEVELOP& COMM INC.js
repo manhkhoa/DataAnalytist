@@ -1,0 +1,29 @@
+var scale_domain = 0.8; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"ATGAM",
+		  	"positions":{"department":{"x":15,"y":480}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"CYTOXAN",
+		  	"positions":{"department":{"x":99,"y":879}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"FLUDARABINE",
+		  	"positions":{"department":{"x":974,"y":83}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"BUSULFEX",
+		  	"positions":{"department":{"x":302,"y":838}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

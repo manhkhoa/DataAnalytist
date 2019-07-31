@@ -1,0 +1,83 @@
+<?php
+/**
+ * Implement Hook Menu
+ */
+function hirenchart_menu(){
+	$items = array();
+	
+	$items['hiren-chart'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_hiren_chart',TRUE),
+		'access callback' => TRUE,
+		'file' => 'hiren.inc',
+	);
+
+	$items['generate-hiren'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'generate_json_hiren',
+		'access callback' => TRUE,
+	);
+
+	return $items;
+}
+
+function generate_json_hiren(){
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+	$db = getDB();
+	$hiren = $db->hiren;
+	$rs = $hiren->find()->limit(10);
+	// $rs = $hiren->find();
+
+	$data = array('topic_data' => array(),);
+	foreach ($rs as $key => $value) {
+
+		if($key != ''){
+			$countpt = count($value['value']['drugname']);
+			if($countpt == 1){
+				$data['topic_data'][] = array(
+					'words' => array(0 => $key),
+					'name' => 'drugcompany',
+					'children' => array(
+						0 => array(
+							'words' => array(0 => $value['value']['drugname']),
+							'name' => 'drugname',
+						),
+					),
+				);
+			}else{
+				$new_array = array_unique($value['value']['drugname']);
+				$child = array();
+
+				foreach ($new_array as $k => $v) {
+					$child[] = array(
+						'words' => array(0 => $v),
+						'name' => 'drugname',
+					);
+				}
+					
+				$data['topic_data'][] = array(
+					'words' => array(0 => $key),
+					'name' => 'drugcompany',
+					'children' => $child,
+				);
+			}
+		}
+	}
+
+	$json_data = json_encode($data);
+
+	$fp = fopen('sites/all/modules/custom/hirenchart/app/data/results.json', 'w');
+	fwrite($fp,$json_data);
+	fclose($fp);
+
+	print('Generate Data Hiren Chart Successful');
+
+}
+
+?>
+
+
+
+

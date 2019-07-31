@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"MIRTAZAPINE TABLETS",
+		  	"positions":{"department":{"x":609,"y":20}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"CARBOPLATIN",
+		  	"positions":{"department":{"x":756,"y":320}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"PACLITAXEL",
+		  	"positions":{"department":{"x":868,"y":27}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"ERLOTINIB",
+		  	"positions":{"department":{"x":3,"y":341}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"GEMCITABINE HYDROCHLORIDE",
+		  	"positions":{"department":{"x":318,"y":679}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

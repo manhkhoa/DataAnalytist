@@ -1,0 +1,29 @@
+var scale_domain = 0.8; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"INIPOMP",
+		  	"positions":{"department":{"x":496,"y":624}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"FENOFIBRATE",
+		  	"positions":{"department":{"x":918,"y":964}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"REVAXIS",
+		  	"positions":{"department":{"x":78,"y":942}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"LEVOTHYROX",
+		  	"positions":{"department":{"x":329,"y":385}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

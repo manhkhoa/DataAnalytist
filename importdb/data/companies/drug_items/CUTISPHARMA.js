@@ -1,0 +1,43 @@
+var scale_domain = 1.2; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"FIRST - LANSOPRAZOLE (3 MG/ML)",
+		  	"positions":{"department":{"x":787,"y":564}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"FIRST LANSOPRAZOLE RX",
+		  	"positions":{"department":{"x":557,"y":769}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"OMEPRAZOLE",
+		  	"positions":{"department":{"x":827,"y":183}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"RSV VACCINE",
+		  	"positions":{"department":{"x":780,"y":546}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"PULMICORT (BUDESONIDE)",
+		  	"positions":{"department":{"x":226,"y":757}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"FIRST OMEPRAZOLE RX",
+		  	"positions":{"department":{"x":647,"y":845}},
+		  	"id":6,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

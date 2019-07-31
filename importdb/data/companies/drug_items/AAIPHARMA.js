@@ -1,0 +1,36 @@
+var scale_domain = 1.2; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"AZATHIOPRINE",
+		  	"positions":{"department":{"x":782,"y":909}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.666666666667,
+		  	"budget_2013":2,
+		},{
+			"name":"PREDNISOLONE",
+		  	"positions":{"department":{"x":573,"y":597}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"PREDNISONE",
+		  	"positions":{"department":{"x":62,"y":230}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"CYCLOSPORINE A",
+		  	"positions":{"department":{"x":880,"y":445}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"AZASAN",
+		  	"positions":{"department":{"x":762,"y":667}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

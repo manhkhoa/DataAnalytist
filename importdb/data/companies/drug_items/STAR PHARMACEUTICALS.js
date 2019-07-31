@@ -1,0 +1,29 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"URIBEL",
+		  	"positions":{"department":{"x":732,"y":940}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":2,
+		  	"budget_2013":2,
+		},{
+			"name":"VIIBRYD",
+		  	"positions":{"department":{"x":174,"y":757}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"PRISTIQ",
+		  	"positions":{"department":{"x":40,"y":456}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"ELMIRON",
+		  	"positions":{"department":{"x":286,"y":559}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

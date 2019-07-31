@@ -1,0 +1,5 @@
+name = OS Access
+description = "Check access to view/edit user profile/node"
+package = OS
+core = 7.x
+file[]=os_access.module

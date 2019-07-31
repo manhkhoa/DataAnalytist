@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"IV SOLUTION",
+		  	"positions":{"department":{"x":524,"y":502}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"DILANTIN",
+		  	"positions":{"department":{"x":572,"y":652}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"PROTONIX",
+		  	"positions":{"department":{"x":762,"y":540}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"METOCLOPRAMIDE",
+		  	"positions":{"department":{"x":692,"y":150}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"ACETAMINOPHEN AND CODEINE PHOSPHATE",
+		  	"positions":{"department":{"x":198,"y":726}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

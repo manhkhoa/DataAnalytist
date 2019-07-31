@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"PROPOFOL",
+		  	"positions":{"department":{"x":966,"y":25}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"FENTANYL",
+		  	"positions":{"department":{"x":370,"y":132}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"GLYCOYRROLATE",
+		  	"positions":{"department":{"x":255,"y":151}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"ROCURONIUM BROMIDE",
+		  	"positions":{"department":{"x":416,"y":785}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"DONEPEZIL HYDROCHLORIDE",
+		  	"positions":{"department":{"x":652,"y":696}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

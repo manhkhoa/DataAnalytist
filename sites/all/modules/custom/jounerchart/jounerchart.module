@@ -1,0 +1,295 @@
+<?php
+/**
+ * Implement Hook Menu
+ */
+function jounerchart_menu(){
+	$items = array();
+	
+	$items['recalls-chart'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_journals_chart',TRUE),
+		'access callback' => TRUE,
+		'file' => 'inc/jouner.inc',
+		'title' => 'Number of recalls by each year'
+	);
+	
+	return $items;
+}
+
+
+/**
+ * Get data and store in json file
+ */
+function journal_getdata(){
+	global $base_url;
+
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+	$db = getDB();	
+
+	$report_date = $db->enf_report; 
+	$report_count = $db->count_enf_rpt; 
+
+	$results = $report_count->find(); 
+
+	$product_type_arr = array();
+	foreach ($results as $key => $value) {
+		$product_type_arr[] = $value['_id']; 
+	}
+
+	// Get data with date
+	$data = array();
+	foreach ($product_type_arr as $key => $val) {
+		// Search all reactions without null date
+		$find_query = array(
+            '$and' => array(
+                array(
+                    'product_type' => $val,
+                    ),
+                array(
+                    'recall_initiation_date' => array('$ne' => ''),
+                    ), 
+                )
+            );
+
+		$result_search = $report_date->find($find_query); // Run find method
+		foreach ($result_search as $r_key => $r_value) {
+			$data[$val][] = (string)$r_value['recall_initiation_date']; // Store date in $data
+		}
+	}	
+
+
+	// Re-structured data array
+	/* Example: [Drug ineffective] => Array
+        (
+            [date] => Array
+                (
+                    [2014] => 2
+                    [2013] => 2
+                    [2006] => 1
+                )
+
+            [count] => 5
+        )
+    */
+
+	$new_data = array(); 
+	foreach ($data as $d_key => $d_val) {
+		$count = count($d_val);
+		$new_tmp_arr = array_count_values($d_val);
+
+		$new_data[$d_key] = array('date' => $new_tmp_arr, 'count' => $count);
+	}
+
+	
+
+	// Store json data in a string before push to file
+	/* [{"articles": [[1997, 1], [2006, 50], [2013, 26]], "total": 457, "name": "Society"}, 
+
+	{"articles": [[1999, 1], [2000, 1], [2012, 2]], "total": 44, "name": "Archives"}] */
+
+	$string = '['; // Start of string
+	$last_data_key = key( array_slice( $new_data, -1, 1, TRUE ) ); // Get last key
+
+	foreach ($new_data as $data_key => $data_val) {
+		$string .= '{"articles": [';
+
+		// Get last key of date
+		$last_date_key = key( array_slice( $data_val['date'], -1, 1, TRUE ) );
+		foreach ($data_val['date'] as $k => $val) {
+			if($last_date_key == $k){
+				$string .= '['.$k.', '.$val.']';
+			} else {
+				$string .= '['.$k.', '.$val.'],';
+			}
+		}
+ 
+		if($last_data_key == $data_key){
+			$string .= '],	"total": '.$data_val['count'].', "name": "'.$data_key.'"}';
+		} else {
+			$string .= '],	"total": '.$data_val['count'].', "name": "'.$data_key.'"},';			
+		}
+	}
+
+	$string .= ']'; // End of string
+
+	$path = getcwd().'/sites/all/modules/custom/jounerchart/data/journals_db.json';	// update data
+
+	file_put_contents($path, $string); // Write to json file
+
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function jounerchart_block_view($delta = '') {
+  switch ($delta) {
+        case 'recalls_chart':
+        $block['subject'] = t('Recalls Chart');
+        $block['content'] = journal_get_chart_block($delta);
+        return $block;
+        break;
+
+    }
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function jounerchart_block_info() {
+  	$blocks['recalls_chart'] = array(
+	        'info' => t('Recalls Chart'),
+	        'status' => TRUE,
+	        'region' => 'content',
+	        'weight' => 0,
+	        'visibility' => 1,
+	);
+
+    return $blocks;
+}
+
+
+/**
+ * Get data for block
+ */
+function journal_get_chart_block($delta){
+	global $base_url, $user;
+
+	$output ='';
+	if($user->roles[4] || $user->roles[3]){
+	    switch ($delta) {
+	        case 'recalls_chart':
+	        	// Code here
+	        	$output = '
+	        		<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'jounerchart') . '/js/journal.js"></script>
+	        		<div class="col-md-12">
+		        		<div class="box-info">
+		        			<h3>Recalls Chart</h3>
+
+			        		<div class="journal-chart">
+
+							<style type="text/css">
+								body .journal-chart{font-family: Arial, sans-serif;font-size:14px;}
+								.axis path,.axis line {fill: none;stroke:#b6b6b6;shape-rendering: crispEdges;}
+								/*.tick line{fill:none;stroke:none;}*/
+								.tick text{fill:#999;}
+								g.journal.active{cursor:pointer;}
+								text.label{font-size:12px;font-weight:bold;cursor:pointer;}
+								text.value{font-size:12px;font-weight:bold;}
+							</style>
+
+							<script type="text/javascript">
+							function truncate(str, maxLength, suffix) {
+								if(str.length > maxLength) {
+									str = str.substring(0, maxLength + 1); 
+									str = str.substring(0, Math.min(str.length, str.lastIndexOf(" ")));
+									str = str + suffix;
+								}
+								return str;
+							}
+
+							var margin = {top: 20, right: 200, bottom: 0, left: 20},
+								width = 800,
+								height = 200;
+
+							var start_year = 2000, 
+								end_year = 2014;
+
+							var c = d3.scale.category20c();
+
+							var x = d3.scale.linear()
+								.range([0, width]);
+
+							var xAxis = d3.svg.axis()
+								.scale(x)
+								.orient("top");
+
+							var formatYears = d3.format("0000");
+							xAxis.tickFormat(formatYears);
+
+							var svg = d3.select("body #page-wrapper #page #content .region-content .journal-chart").append("svg")
+								.attr("width", width + margin.left + margin.right)
+								.attr("height", height + margin.top + margin.bottom)
+								.style("margin-left", margin.left + "px")
+								.append("g")
+								.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+							d3.json("'.$base_url.'/sites/all/modules/custom/jounerchart/data/journals_db.json", function(data) {
+								x.domain([start_year, end_year]);
+								var xScale = d3.scale.linear()
+									.domain([start_year, end_year])
+									.range([0, width]);
+
+								svg.append("g")
+									.attr("class", "x axis")
+									.attr("transform", "translate(0," + 0 + ")")
+									.call(xAxis);
+
+								for (var j = 0; j < data.length; j++) {
+									var g = svg.append("g").attr("class","journal");
+
+									var circles = g.selectAll("circle")
+										.data(data[j]["articles"])
+										.enter()
+										.append("circle");
+
+									var text = g.selectAll("text")
+										.data(data[j]["articles"])
+										.enter()
+										.append("text");
+
+									var rScale = d3.scale.linear()
+										.domain([0, d3.max(data[j]["articles"], function(d) { return d[1]; })])
+										.range([2, 9]);
+
+									circles
+										.attr("cx", function(d, i) { return xScale(d[0]); })
+										.attr("cy", j*30+20)
+										.attr("r", function(d) { return rScale(d[1]); })
+										.style("fill", function(d) { return c(j); });
+
+									text
+										.attr("y", j*30+25)
+										.attr("x",function(d, i) { return xScale(d[0])-5; })
+										.attr("class","value")
+										.text(function(d){ return d[1]; })
+										.style("fill", function(d) { return c(j); })
+										.style("display","none");
+
+									g.append("text")
+										.attr("y", j*30+25)
+										.attr("x",width+40)
+										.attr("class","label")
+										.text(truncate(data[j]["name"],30,"..."))
+										.style("fill", function(d) { return c(j); })
+										.on("mouseover", mouseover)
+										.on("mouseout", mouseout);
+								};
+
+								function mouseover(p) {
+									var g = d3.select(this).node().parentNode;
+									d3.select(g).selectAll("circle").style("display","none");
+									d3.select(g).selectAll("text.value").style("display","block");
+								}
+
+								function mouseout(p) {
+									var g = d3.select(this).node().parentNode;
+									d3.select(g).selectAll("circle").style("display","block");
+									d3.select(g).selectAll("text.value").style("display","none");
+								}
+							});
+
+							</script>
+							</div>
+						</div>
+
+					</div>';
+
+	        return $output;
+	        break;
+	    }
+	}
+}

@@ -1,0 +1,43 @@
+var scale_domain = 1.6; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"GILENYA",
+		  	"positions":{"department":{"x":619,"y":706}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":2,
+		},{
+			"name":"GILENYA (FTY) CAPSULE, 0.5MG",
+		  	"positions":{"department":{"x":396,"y":239}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":2,
+		},{
+			"name":"PROBIOTICA (LACTOBACILLUS REUTERI)",
+		  	"positions":{"department":{"x":525,"y":911}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.166666666667,
+		  	"budget_2013":1,
+		},{
+			"name":"CYMBALTA (DULOXETINE HYDROCHLORIDE)",
+		  	"positions":{"department":{"x":979,"y":543}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.166666666667,
+		  	"budget_2013":1,
+		},{
+			"name":"GILENYA (FTY)CAPSULE",
+		  	"positions":{"department":{"x":682,"y":286}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.166666666667,
+		  	"budget_2013":1,
+		},{
+			"name":"GLEEVEC (IMATINIB) UNKNOWN",
+		  	"positions":{"department":{"x":6,"y":371}},
+		  	"id":6,
+		  	"budget_2012":1,
+		  	"change":0.166666666667,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

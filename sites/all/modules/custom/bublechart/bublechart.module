@@ -1,0 +1,47 @@
+<?php
+/**
+ * Implement Hook Menu
+ */
+function bublechart_menu(){
+	$items = array();
+	
+	$items['buble-chart'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_bubble_chart',TRUE),
+		'access callback' => TRUE,
+		'file' => 'buble.inc',
+	);
+
+	$items['json-bubble'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'get_json_bubble',
+		'access callback' => TRUE,
+	);
+
+	return $items;
+}
+
+function get_json_bubble(){
+
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+	$db = getDB();
+
+	$edrug = $db->recdrug1;
+	$sx = array('value' => -1);
+	$kq = $edrug->find()->sort($sx)->limit(10);
+	$data = array("name" => "bubble","children"=>array());
+	foreach ($kq as $key => $v) {
+		$data['children'][] = array('name' => $v['_id'],'children' => array(0 => array('name'=>$v['_id'],'size'=>$v['value'] )));		
+	}
+
+	$b = drupal_json_output($data);
+	return $b;
+}
+
+?>
+
+
+
+

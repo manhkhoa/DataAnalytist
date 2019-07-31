@@ -1,0 +1,43 @@
+var scale_domain = 1.8; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"CORNEA PRESERVATION MEDIA",
+		  	"positions":{"department":{"x":707,"y":983}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":3,
+		},{
+			"name":"ANTI-REJECTION DROPS",
+		  	"positions":{"department":{"x":935,"y":667}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.666666666667,
+		  	"budget_2013":2,
+		},{
+			"name":"NON-STERILE HUMAN DONOR CORNEA FOR TRANSPLANT",
+		  	"positions":{"department":{"x":986,"y":213}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"EYE TISSUE HUMAN",
+		  	"positions":{"department":{"x":640,"y":852}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"NON-STERILE HUMAN CORNEA FOR TRANSPLANT",
+		  	"positions":{"department":{"x":62,"y":405}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"ANIT-REJECTION DROPS",
+		  	"positions":{"department":{"x":922,"y":877}},
+		  	"id":6,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

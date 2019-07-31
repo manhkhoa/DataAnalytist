@@ -1,0 +1,1006 @@
+<?php
+/**
+ * Implement Hook Menu
+ */
+function circle_chart_menu(){
+	$items = array();
+	
+	$items['drugs-chart'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_circle_chart',TRUE),
+		'access callback' => TRUE,
+		'file' => 'inc/drugs.inc',
+		'title' => 'Drugs Chart'
+	);
+
+	$items['drugs-chart/%'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_drug_chart',TRUE),
+		'access callback' => TRUE,
+		'file' => 'inc/drugs.inc',
+		'title' => 'Drugs Chart'
+	);
+
+	$items['drugs-info'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_drug_info',TRUE),
+		'access callback' => TRUE,
+		'file' => 'inc/druginfo.inc',
+		'title' => 'Drugs Information'
+	);	
+
+	$items['adverse-events-chart'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_circle_chart_com',TRUE),
+		'access callback' => TRUE,
+		'file' => 'inc/companies.inc',
+		'title' => 'Adverse Events'
+	);
+
+	$items['adverse-events-month'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'get_adverse_events_month',
+		'access callback' => TRUE,
+	);
+
+	$items['adverse-events-month6'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'get_adverse_events_month6',
+		'access callback' => TRUE,
+	);
+
+	$items['adverse-events-month3'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'get_adverse_events_month3',
+		'access callback' => TRUE,
+	);
+
+	$items['adverse-events-years'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'get_adverse_events_years',
+		'access callback' => TRUE,
+	);
+	
+	return $items;
+}
+
+function get_adverse_events_years(){
+	global $base_url;
+
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+	$db = getDB();
+
+	$eventcom = $db->demographics;
+	$sort_time = array('fda_dt' => -1);
+	$current_time = $eventcom->find()->sort($sort_time)->limit(1);
+
+	foreach ($current_time as $ct) {
+		$time = $ct['fda_dt'];
+	}
+
+	$cr_year = substr($time,0,4);
+
+	for($i=0;$i<=11;$i++){
+		$regex[$i] = new MongoRegex("/^".($cr_year-$i)."/i");
+	}
+
+	$search = array();
+	for($i=0;$i<=11;$i++){
+		$search[$i] = array('fda_dt'=> $regex[$i]);
+	}
+
+	$event = array();
+	for($i=11;$i>=0;$i--){
+		$event[] = $eventcom->find($search[$i])->count();
+	}
+
+	$j = 11;
+	for($i=12;$i<=23;$i++){	
+		$event[$i] = $cr_year - $j;
+		$j--;
+	}
+
+	$file = json_encode($event);
+	$path = getcwd().'/sites/all/modules/custom/circle_chart/js/month/year.json';
+	file_put_contents($path, $file); // Write to json file
+	
+}
+
+function get_adverse_events_month(){
+	global $base_url;
+
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+	$db = getDB();
+
+	$eventcom = $db->demographics;
+	$sort_time = array('fda_dt' => -1);
+	$current_time = $eventcom->find()->sort($sort_time)->limit(1);
+	foreach ($current_time as $ct) {
+		$time = $ct['fda_dt'];
+	}
+	$cr_year = substr($time,0,4);
+	$cr_month = substr($time,4,-2);
+
+	if($cr_month != 10){
+		$cr_month = str_replace("0","", $cr_month);
+	}
+
+	if($cr_month == '12'){
+		$regex = array();
+		for($i=1;$i<=12;$i++){
+			if($i<=9){
+				$regex[$i] = new MongoRegex("/^".$cr_year."0".$i."/i");
+			}else{
+				$regex[$i] = new MongoRegex("/^".$cr_year.$i."/i");
+			}
+		}
+
+		$search = array();
+		for($i=1;$i<=12;$i++){
+			$search[$i] = array('fda_dt'=> $regex[$i]);
+		}
+
+		$event = array();
+		for($i=1;$i<=12;$i++){
+			$event[$i] = $eventcom->find($search[$i])->count();
+		}
+
+		$j = 1;
+		for($i=13;$i<=24;$i++){
+			if($i<=21){
+				$event[$i] = '0'.$j.'/'.$cr_year;
+			}else{
+				$event[$i] = $j.'/'.$cr_year;
+			}
+			$j++;
+		}
+
+		$file = json_encode($event);
+		$path = getcwd().'/sites/all/modules/custom/circle_chart/js/month/month.json';
+		file_put_contents($path, $file); // Write to json file
+		
+	}else{
+		$month_old = 12 - $cr_month;
+		$year_old = $cr_year - 1;
+
+		//old year
+		$regex = array();
+		for($i=($cr_month+1);$i<=($cr_month+$month_old);$i++){		
+			if($i<=9){
+				$regex[$i] = new MongoRegex("/^".$year_old."0".$i."/i");
+			}else{
+				$regex[$i] = new MongoRegex("/^".$year_old.$i."/i");
+			}
+		}
+
+		$search = array();
+		for($i=($cr_month+1);$i<=($cr_month+$month_old);$i++){
+			$search[$i] = array('fda_dt'=> $regex[$i]);
+		}
+		
+		$event_tmp = array();
+		for($i=($cr_month+1);$i<=($cr_month+$month_old);$i++){
+			$event_tmp[$i] = $eventcom->find($search[$i])->count();
+		}
+
+		$event = array();
+		foreach ($event_tmp as $key => $value) {
+			$event[] = $value;
+		}
+		
+		// new year
+		$regex1 = array();
+		for($i=$cr_month;$i >= 1;$i--){
+			if($i<=9){
+				$regex1[$i] = new MongoRegex("/^".$cr_year."0".$i."/i");
+			}else{
+				$regex1[$i] = new MongoRegex("/^".$cr_year.$i."/i");
+			}
+		}
+
+		$search1 = array();
+		for($i=$cr_month;$i>=1;$i--){
+			$search1[$i] = array('fda_dt'=> $regex1[$i]);
+		}
+
+		$event_tmp1 = array();
+		for($i=$cr_month;$i>=1;$i--){
+			$event_tmp1[$i] = $eventcom->find($search1[$i])->count();
+		}
+		
+		$j=count($event);
+		for($i=1;$i<=$cr_month;$i++){
+			$event[$j] = $event_tmp1[$i];
+			$j++;
+		}
+
+		$j=count($event);
+		for($i=($cr_month+1);$i<=($cr_month+$month_old);$i++){
+			if($i<=9){
+				$event[$j] = '0'.$i.'/'.$year_old;
+			}else{
+				$event[$j] = $i.'/'.$year_old;
+			}
+			$j++;
+		}
+
+		$j=count($event);
+		for($i=1;$i<=$cr_month;$i++){
+			if($i<=9){
+				$event[$j] = '0'.$i.'/'.$cr_year;
+			}else{
+				$event[$j] = $i.'/'.$cr_year;
+			}
+			$j++;
+		}
+
+		$file = json_encode($event);
+		$path = getcwd().'/sites/all/modules/custom/circle_chart/js/month/month.json';
+		file_put_contents($path, $file); // Write to json file
+
+	}
+}
+
+function get_adverse_events_month6(){
+	global $base_url;
+
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+	$db = getDB();
+
+	$eventcom = $db->demographics;
+	$sort_time = array('fda_dt' => -1);
+	$current_time = $eventcom->find()->sort($sort_time)->limit(1);
+	foreach ($current_time as $ct) {
+		$time = $ct['fda_dt'];
+	}
+	$cr_year = substr($time,0,4);
+	$cr_month = substr($time,4,-2);
+
+	if($cr_month >= '6'){
+		$regex = array();
+		for($i=$cr_month;$i>=$cr_month-5;$i--){
+			if($i<=9){
+				$regex[$i] = new MongoRegex("/^".$cr_year."0".$i."/i");
+			}else{
+				$regex[$i] = new MongoRegex("/^".$cr_year.$i."/i");
+			}
+		}
+
+		$search = array();
+		for($i=$cr_month;$i>=$cr_month-5;$i--){
+			$search[$i] = array('fda_dt'=> $regex[$i]);
+		}
+
+		$event_tmp = array();
+		for($i=$cr_month;$i>=$cr_month-5;$i--){
+			$event_tmp[$i] = $eventcom->find($search[$i])->count();
+		}
+
+		$event = array();
+		for($i=$cr_month-5;$i<=$cr_month;$i++){
+			$event[] = $event_tmp[$i];
+		}
+
+		$j = $cr_month-5;
+		for($i=6;$i<=11;$i++){
+			if($j<=9){
+				$event[$i] = '0'.$j.'/'.$cr_year;
+			}else{
+				$event[$i] = $j.'/'.$cr_year;
+			}
+			$j++;
+		}
+
+		$file = json_encode($event);
+		$path = getcwd().'/sites/all/modules/custom/circle_chart/js/month/month6.json';
+		file_put_contents($path, $file); // Write to json file
+		
+	}else{
+		$month_old = 5 - $cr_month;
+		$year_old = $cr_year - 1;
+
+		//old year
+		$regex1 = array();
+		for($i=12;$i>=(12-$month_old);$i--){		
+			if($i<=9){
+				$regex1[$i] = new MongoRegex("/^".$year_old."0".$i."/i");
+			}else{
+				$regex1[$i] = new MongoRegex("/^".$year_old.$i."/i");
+			}
+		}
+
+		$search1 = array();
+		for($i=12;$i>=(12-$month_old);$i--){
+			$search1[$i] = array('fda_dt'=> $regex1[$i]);
+		}
+		
+		$event_tmp1 = array();
+		for($i=12;$i>=(12-$month_old);$i--){
+			$event_tmp1[$i] = $eventcom->find($search1[$i])->count();
+		}
+
+		$event = array();
+		for($i=(12-$month_old);$i<=12;$i++){
+			$event[] = $event_tmp1[$i];
+		}
+		
+		// new year
+		$regex2 = array();
+		for($i=1;$i <= $cr_month;$i++){
+			$regex2[$i] = new MongoRegex("/^".$cr_year."0".$i."/i");
+		}
+
+		$search2 = array();
+		for($i=1;$i <= $cr_month;$i++){
+			$search2[$i] = array('fda_dt'=> $regex2[$i]);
+		}
+		
+		$j=count($event);
+		for($i=1;$i<=$cr_month;$i++){
+			$event[$j] = $eventcom->find($search2[$i])->count();
+			$j++;
+		}
+
+		$j=count($event);
+		for($i=(12-$month_old);$i<=12;$i++){
+			if($i<=9){
+				$event[$j] = '0'.$i.'/'.$year_old;
+			}else{
+				$event[$j] = $i.'/'.$year_old;
+			}
+			$j++;
+		}
+
+		$j=count($event);
+		for($i=1;$i<=$cr_month;$i++){
+			$event[$j] = '0'.$i.'/'.$cr_year;
+			$j++;
+		}
+
+		$file = json_encode($event);
+		$path = getcwd().'/sites/all/modules/custom/circle_chart/js/month/month6.json';
+		file_put_contents($path, $file); // Write to json file
+	}
+}
+
+function get_adverse_events_month3(){
+	global $base_url;
+
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+	$db = getDB();
+
+	$eventcom = $db->demographics;
+	$sort_time = array('fda_dt' => -1);
+	$current_time = $eventcom->find()->sort($sort_time)->limit(1);
+	foreach ($current_time as $ct) {
+		$time = $ct['fda_dt'];
+	}
+	$cr_year = substr($time,0,4);
+	$cr_month = substr($time,4,-2);
+	if($cr_month != 10){
+		$cr_month = str_replace("0","", $cr_month);
+	}
+
+	if($cr_month >= '3'){
+		$regex = array();
+		for($i=$cr_month;$i>=$cr_month-2;$i--){
+			if($i<=9){
+				$regex[$i] = new MongoRegex("/^".$cr_year."0".$i."/i");
+			}else{
+				$regex[$i] = new MongoRegex("/^".$cr_year.$i."/i");
+			}
+		}
+
+		$search = array();
+		for($i=$cr_month;$i>=$cr_month-2;$i--){
+			$search[$i] = array('fda_dt'=> $regex[$i]);
+		}
+
+		$event_tmp = array();
+		for($i=$cr_month;$i>=$cr_month-2;$i--){
+			$event_tmp[$i] = $eventcom->find($search[$i])->count();
+		}
+
+		$event = array();
+		for($i=$cr_month-2;$i<=$cr_month;$i++){
+			$event[] = $event_tmp[$i];
+		}
+
+		$j = $cr_month-2;
+		for($i=3;$i<=5;$i++){
+			if($j<=9){
+				$event[$i] = '0'.$j.'/'.$cr_year;
+			}else{
+				$event[$i] = $j.'/'.$cr_year;
+			}
+			$j++;
+		}
+
+		$file = json_encode($event);
+		$path = getcwd().'/sites/all/modules/custom/circle_chart/js/month/month3.json';
+		file_put_contents($path, $file); // Write to json file
+		
+	}else{
+		$month_old = 2 - $cr_month;
+		$year_old = $cr_year - 1;
+
+		//old year
+		$regex1 = array();
+		for($i=12;$i>=(12-$month_old);$i--){		
+			if($i<=9){
+				$regex1[$i] = new MongoRegex("/^".$year_old."0".$i."/i");
+			}else{
+				$regex1[$i] = new MongoRegex("/^".$year_old.$i."/i");
+			}
+		}
+
+		$search1 = array();
+		for($i=12;$i>=(12-$month_old);$i--){
+			$search1[$i] = array('fda_dt'=> $regex1[$i]);
+		}
+		
+		$event_tmp1 = array();
+		for($i=12;$i>=(12-$month_old);$i--){
+			$event_tmp1[$i] = $eventcom->find($search1[$i])->count();
+		}
+
+		$event = array();
+		for($i=(12-$month_old);$i<=12;$i++){
+			$event[] = $event_tmp1[$i];
+		}
+		
+		// new year
+		$regex2 = array();
+		for($i=1;$i <= $cr_month;$i++){
+			$regex2[$i] = new MongoRegex("/^".$cr_year."0".$i."/i");
+		}
+
+		$search2 = array();
+		for($i=1;$i <= $cr_month;$i++){
+			$search2[$i] = array('fda_dt'=> $regex2[$i]);
+		}
+		
+		$j=count($event);
+		for($i=1;$i<=$cr_month;$i++){
+			$event[$j] = $eventcom->find($search2[$i])->count();
+			$j++;
+		}
+
+		$j=count($event);
+		for($i=(12-$month_old);$i<=12;$i++){
+			$event[$j] = $i.'/'.$year_old;
+			$j++;
+		}
+
+		$j=count($event);
+		for($i=1;$i<=$cr_month;$i++){
+			$event[$j] = '0'.$i.'/'.$cr_year;
+			$j++;
+		}
+
+		$file = json_encode($event);
+		$path = getcwd().'/sites/all/modules/custom/circle_chart/js/month/month3.json';
+		file_put_contents($path, $file); // Write to json file
+	}
+}
+/**
+ * Get data and store in json file
+ * All Drugs
+ */
+function circle_getdata_drugs(){
+	global $base_url;
+
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+	$db = getDB();
+
+	$counting_drugs = $db->count_drugs;
+	$demo = $db->demographics;
+
+	// Get 500 popular drugs
+	$sort_drugs_query = array(
+	    array(
+	        '$sort' => array(
+	            "value" => -1,
+	        ),
+	    ),
+	    array(
+	    	'$limit' => 500
+	    )
+	);
+
+	$results = $counting_drugs->aggregate($sort_drugs_query); // Run aggregate
+
+	// fetch data into js file
+	
+	$data = 'var nytg1 = nytg1 || {};';
+	
+	// Get category list
+	$list_manufacturers = 'nytg1.category_list = [];';
+
+	// Get category data
+	$list_category_data = 'nytg1.category_data = [];';
+
+	// Update coordinates
+	$list_drugs = 'nytg1.budget_array_data = [';	
+
+	$total_events = $demo->find()->count();
+
+	$id = 1;
+	$total_domain = 0;
+	foreach ($results['result'] as $key => $value) {		
+		$name = $value['_id'];
+		$count = $value['value'];
+		$total_domain += $count;
+
+		$x = rand(0,999);
+		$y = rand(0,999);
+
+		$change = $count/$total_events;
+
+		$list_drugs .= '{
+			"name":"'.$name.'",
+		  	"positions":{"department":{"x":'.$x.',"y":'.$y.'}},
+		  	"id":'.$id.',
+		  	"budget_2013":'.$count.',
+		  	"budget_2012": 1 ,
+		  	"change": '.$change.',
+		},';
+		
+		$id += 1;		
+	}
+
+	$scale_domain = $total_domain/5;
+	$list_drugs .= ']; var scale_domain = '.$scale_domain.'; ';
+
+	// Set data
+	$data .= $list_drugs.$list_manufacturers.$list_category_data;
+
+	$path = getcwd().'/sites/all/modules/custom/circle_chart/js/drugs/data1.js';	// update data
+
+	file_put_contents($path, $data); // Write to json file
+
+}
+
+
+/**
+ * Get data and store in json file
+ * Drug items
+ */
+function circle_getdata_drug_item($company_name){
+	global $base_url;
+
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+
+	$db = getDB();
+	$com = $db->com;
+	$com_drugs = $db->com_drugs;
+	
+
+	$find_query = array('value.company' => $company_name);
+	$find_query_drugs = array('_id' => $company_name);
+	
+	$result_search_com = $com->find($find_query); // Run find method
+
+	$result_search_drugs = $com_drugs->find($find_query_drugs); // Run find method
+
+	$total = $result_search_com->count();
+	$drugs_arr = array();
+
+	$total_domain = 0;
+	foreach ($result_search_drugs as $key => $value) {
+		
+		if(is_array($value['value']['drugs'])){
+			foreach ($value['value']['drugs'] as $val) {
+				if(is_array($val)){
+					foreach ($val as $v) {
+						if(is_array($v)){
+							foreach ($v as $v_drug) {
+								$drugs_arr[] = $v_drug;
+								$total_domain += 1;
+							}
+						} else {
+							$drugs_arr[] = $v;
+							$total_domain += 1;
+						}						
+					}
+				} else {
+					$drugs_arr[] = $val;
+					$total_domain += 1;
+				}
+				
+			}
+		} else {
+			$drugs_arr[] = $value['value']['drugs'];
+			$total_domain += 1;
+		}
+	}
+
+	$new_drug_arr = array_count_values($drugs_arr);
+	arsort($new_drug_arr);
+
+	$new_drug_arr = array_slice($new_drug_arr, 0, 500);
+
+	// fetch data into js file
+	$scale_domain = $total_domain/5;
+	$data = 'var scale_domain = '.$scale_domain.'; var nytg = nytg || {};';
+	
+	// Get category list
+	$list_manufacturers = 'nytg.category_list = [];';
+
+	// Get category data
+	$list_category_data = 'nytg.category_data = [];';
+
+	// Update coordinates
+	$list_drugs = 'nytg.budget_array_data = [';		
+
+	$id = 1;
+	foreach ($new_drug_arr as $key => $value) {		
+		$change = $value/$total;
+
+		$x = rand(0,999);
+		$y = rand(0,999);
+
+		$list_drugs .= '{
+			"name":"'.$key.'",
+		  	"positions":{"department":{"x":'.$x.',"y":'.$y.'}},
+		  	"id":'.$id.',
+		  	"budget_2012":1,
+		  	"change":'.$change.',
+		  	"budget_2013":'.$value.',
+		},';
+		
+		$id += 1;
+		
+	}
+
+	$list_drugs .= '];';
+
+	// Set data
+	$data .= $list_drugs.$list_manufacturers.$list_category_data;
+
+	$path = getcwd().'/sites/all/modules/custom/circle_chart/js/companies/drug_data/'.$company_name.'.js';	// update data
+
+	file_put_contents($path, $data); // Write to json file
+
+}
+
+/**
+ * Get data and store in json file
+ * Companies
+ */
+function circle_getdata_companies(){
+	global $base_url;
+
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+	$db = getDB();
+
+	$counting_companies = $db->count_companies;
+	$com = $db->com;
+
+	// Sort companies
+	$sort_com_query = array(
+	    array(
+	        '$sort' => array(
+	            "value" => -1,
+	        ),
+	    ),
+	);
+
+	$results = $counting_companies->aggregate($sort_com_query);
+
+	$list_drugs_com = 'var nytg = nytg || {};nytg.budget_array_data = [';	
+
+	// Get total
+	$total = 0;
+	foreach ($results['result'] as $key => $value) {
+		$total = $total + $value['value'];
+	}
+
+	foreach ($results['result'] as $key => $value) {
+		$name_com = '';
+		$change = $value['value']/$total;
+
+		if($value['_id'] == ''){
+			$name_com = 'Unknown';
+		}else{
+			$name_com = $value['_id'];
+		}
+
+		$x = rand(0,999);
+		$y = rand(0,999);
+
+		if($name_com != 'Unknown'){
+			$find_num_drugs_query_str = array('value.company' => $name_com);
+		} else {
+			$find_num_drugs_query_str = array('value.company' => '');
+		}
+
+		$results_count_drugs = $com->find($find_num_drugs_query_str);
+
+		$num_drugs = 0;
+		foreach ($results_count_drugs as $drug_value) {
+		
+			if(is_array($drug_value['value']['drugs'])){
+				foreach ($drug_value['value']['drugs'] as $val) {
+					if(is_array($val)){
+						foreach ($val as $v) {
+							if(is_array($v)){
+								foreach ($v as $v_drug) {
+									$num_drugs += 1;
+								}
+							} else {
+								$num_drugs += 1;
+							}						
+						}
+					} else {
+						$num_drugs += 1;
+					}
+					
+				}
+			} else {
+				$num_drugs += 1;
+			}
+		}
+
+		$num_drugs = makecomma($num_drugs);
+
+		$list_drugs_com .= '{
+			"name":"'.$name_com.'",
+			"positions":{"department":{"x":'.$x.',"y":'.$y.'}},
+		  	"id":'.$key.',
+		  	"budget_2012":1,
+		  	"change":'.$change.',
+		  	"budget_2013":'.$value['value'].',
+		  	"department": "'.$num_drugs.'"
+		},';
+	}
+
+	$list_drugs_com .= '];nytg.category_list = [];nytg.category_data = [];';
+
+	$path = getcwd().'/sites/all/modules/custom/circle_chart/js/companies/data.js';	// update data
+
+	file_put_contents($path, $list_drugs_com); // Write to json file
+
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function circle_chart_block_info() {
+	$blocks['drug_chart'] = array(
+	        'info' => t('Drugs Chart'),
+	        'status' => TRUE,
+	        'region' => 'content',
+	        'weight' => 0,
+	        'visibility' => 1,
+	);
+
+	$blocks['adverse_events_chart'] = array(
+	        'info' => t('Adverse Events Chart'),
+	        'status' => TRUE,
+	        'region' => 'content',
+	        'weight' => 0,
+	        'visibility' => 1,
+	);
+
+	$blocks['adverse_events_chart_m'] = array(
+	        'info' => t('Adverse Events Chart Month'),
+	        'status' => TRUE,
+	        'region' => 'content',
+	        'weight' => 0,
+	        'visibility' => 1,
+	);
+
+    return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function circle_chart_block_view($delta = '') {
+  	switch ($delta) {
+        case 'drug_chart':
+        $block['subject'] = t('Drugs Bubble Chart');
+        $block['content'] = get_chart_block($delta);
+        return $block;
+        break;
+
+        case 'adverse_events_chart':
+        $block['subject'] = t('Adverse Events Bubble Chart');
+        $block['content'] = get_chart_block($delta);
+        return $block;
+        break;
+
+        case 'adverse_events_chart_m':
+        $block['subject'] = t('Adverse Events Bar Chart');
+        $block['content'] = get_chart_block($delta);
+        return $block;
+        break;
+    }
+}
+
+
+/**
+ * Get data for block
+ */
+function get_chart_block($delta){
+	global $base_url, $user;
+
+	$output ='';
+	if($user->roles[4] || $user->roles[3]){
+	    switch ($delta) {
+	        case 'drug_chart':
+	        	// Code here
+				$output = '
+					<script type="text/javascript" src="'.$base_url.'/importdb/data/drugs/data.js"></script>
+	        		<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/drugs/block_libs.js"></script>
+	        		<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/tooltip.js"></script>
+	        		<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/drugs/custom1.js"></script>
+
+	        		<link rel="stylesheet" href="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/css/drugs/base1.css" type="text/css" />
+	        		<link rel="stylesheet" href="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/css/drugs/main1.css" type="text/css" />
+
+	        		<div class="col-md-12 front-block">
+		        		<div class="box-info">
+		        			<h3>Drugs Chart</h3>
+
+							<div id="FreeFormMain">
+
+							  <div class="nytg1">
+
+							    <div id="nytg1-chartFrame">
+							      <div id="nytg1-chart">
+
+							        <div class="nytg1-navBar"> <!-- Start tab -->
+							          <div id="nytg1-search" style="display:none;"></div>
+							            <ul class="nytg1-navigation clearfix">
+							              <li id="nytg1-nav-all">All drug names</li>
+							            </ul>
+							        </div> <!-- End tab -->
+
+							        <div id="nytg1-tooltip">
+							          <div id="nytg1-tooltipContainer">
+							            <div class="nytg1-department"></div>
+							            <div class="nytg1-name"></div>
+							          <div class="nytg1-discretion"></div>
+							            <div class="nytg1-valuesContainer">
+							              <span class="nytg1-value"></span>
+							              <span class="nytg1-change"></span>
+							            </div>
+							            <div class="nytg1-chart"></div>
+							            <div class="nytg1-tail"></div>
+							          </div>
+							        </div>
+
+							        <div id="nytg1-chartCanvas"></div> <!-- Very Important -->
+
+							      </div>
+							    </div>
+							  </div>
+							<!--END Stencil generated content. -->    
+
+							</div><!--close main free form -->
+						</div>
+					</div>
+	        		';
+	        return $output;
+	        break;
+
+	        case 'adverse_events_chart':
+	        	// Code here
+	        	$output = '
+	        		<script type="text/javascript" src="'.$base_url.'/importdb/data/companies/data.js"></script>
+	        		<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/companies/block_libs.js"></script>
+	        		<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/tooltip.js"></script>
+	        		<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/custom.js"></script>
+
+	        		<link rel="stylesheet" href="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/css/base.css" type="text/css" />
+	        		<link rel="stylesheet" href="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/css/main.css" type="text/css" />
+
+
+	        		<div class="col-md-12 front-block">
+		        		<div class="box-info">					
+		        			<h3>Adverse Events Chart</h3>
+
+							<div id="interactiveFreeFormMain">
+
+							  <div class="nytg">
+
+							    <div id="nytg-chartFrame">
+							      <div id="nytg-chart">
+
+							        <div class="nytg-navBar"> <!-- Start tab -->
+							          <div id="nytg-search" style="display:none;"></div>
+							            <ul class="nytg-navigation clearfix">
+							              <li id="nytg-nav-all">All drug names</li>
+							            </ul>
+							        </div> <!-- End tab -->
+
+							        <div id="nytg-tooltip">
+							          <div id="nytg-tooltipContainer">					            
+							            <div class="nytg-name"></div>
+							          <div class="nytg-discretion"></div>
+							            <div class="nytg-valuesContainer">
+							              <span class="nytg-value"></span>
+							              <span class="nytg-change"></span>
+							              <div class="nytg-department"></div>
+							            </div>
+							            <div class="nytg-chart"></div>
+							            <div class="nytg-tail"></div>
+							          </div>
+							        </div>
+
+							        <div id="nytg-chartCanvas"></div> <!-- Very Important -->
+
+							      </div>
+							    </div>
+							  </div>
+							<!--END Stencil generated content. -->    
+
+							</div><!--close main free form -->
+						</div>
+					</div>';
+			return $output;
+	        break;
+
+			case 'adverse_events_chart_m':
+				$output = '
+					<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/month/jquery-1.10.2.js"></script>
+
+					<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/month/jquery.jqplot.min.js"></script>
+
+					<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/month/data-line.js"></script>
+
+					<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/month/jqplot.barRenderer.min.js"></script>
+
+					<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/month/jqplot.categoryAxisRenderer.min.js"></script>
+
+					<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/month/jqplot.cursor.min.js"></script>
+
+					<script type="text/javascript" src="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/js/month/jqplot.pointLabels.min.js"></script>
+
+					<link rel="stylesheet" href="'.$base_url.'/'.drupal_get_path('module', 'circle_chart') . '/css/month/jquery-jqplot-min.css" type="text/css" />
+					
+					<div style="padding:20px;font-size:20px;"></div>
+					<div style="padding-left:20px;padding-bottom:10px;">
+					<label>Select Period Time: </label>
+					<select id="select-month">
+						<option value="12">12 Months</option>
+						<option value="year">12 Years</option>
+						<option value="6">06 Months</option>
+						<option value="3">03 Months</option>
+					</select>
+					</div>
+    				<div id="chart12" style="width:100%; height:400px;margin-bottom:30px;"></div>
+    				<div id="chart4" style="width:100%; height:400px;margin-bottom:30px;"></div>
+    				<div id="chart6" style="width:100%; height:400px;margin-bottom:30px;"></div>
+    				<div id="chart3" style="width:100%; height:400px;margin-bottom:30px;"></div>
+
+				';
+			return $output;
+	        break;      
+	    }
+	}
+}
+
+// Return number formar with comma
+function makecomma($input)
+{
+    if(strlen($input)<=3)
+    { return $input; }
+    $length=substr($input,0,strlen($input)-3);
+    $formatted_input = makecomma($length).",".substr($input,-3);
+    return $formatted_input;
+}

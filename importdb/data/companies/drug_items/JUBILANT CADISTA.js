@@ -1,0 +1,43 @@
+var scale_domain = 1.6; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"METHYLPREDNISOLONE TABLETS",
+		  	"positions":{"department":{"x":493,"y":442}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":3,
+		  	"budget_2013":3,
+		},{
+			"name":"PATADAY",
+		  	"positions":{"department":{"x":814,"y":706}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"VIGAMOX",
+		  	"positions":{"department":{"x":2,"y":810}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"ZYRTEC",
+		  	"positions":{"department":{"x":436,"y":977}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"SYNTHROID",
+		  	"positions":{"department":{"x":658,"y":778}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"DENAVIR",
+		  	"positions":{"department":{"x":773,"y":283}},
+		  	"id":6,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

@@ -1,0 +1,61 @@
+
+name = OS Admin
+description = A flexible, recolorable theme with many regions.
+package = Core
+version = VERSION
+core = 7.x
+
+
+stylesheets[all][] = css/animate.css
+stylesheets[all][] = css/font-awesome.min.css
+stylesheets[all][] = css/jquery-ui-1.10.4.custom.min.css
+stylesheets[all][] = css/style-responsive.css
+stylesheets[all][] = css/bootstrap.min.css
+stylesheets[all][] = css/demo_table.css
+stylesheets[all][] = css/atom-style.css
+stylesheets[all][] = css/custom.css
+
+
+scripts[] = js/os_admin.js
+
+; scripts[] = js/console-numbering.js
+; scripts[] = js/form-components.js
+; scripts[] = js/jPushMenu.js
+; scripts[] = js/jquery-1.10.2.js
+ scripts[] = js/jquery-ui-1.9.1.js
+; scripts[] = js/jquery-ui-1.10.4.custom.min.js
+; scripts[] = js/select-checkbox.js
+ scripts[] = js/side-chats.js
+ scripts[] = js/jquery.sparkline.js
+; scripts[] = js/sparkline-chart.js
+ scripts[] = js/jPushMenu.js
+; scripts[] = js/sliders.js
+; scripts[] = js/smooth-sliding-menu.js
+; scripts[] = js/to-do-admin.js
+ scripts[] = js/bootstrap.min.js
+ 
+
+
+regions[header] = Header
+regions[help] = Help
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+regions[highlighted] = Highlighted
+
+regions[featured] = Featured
+regions[content] = Content
+regions[sidebar_first] = Sidebar first
+regions[sidebar_second] = Sidebar second
+
+regions[triptych_first] = Triptych first
+regions[triptych_middle] = Triptych middle
+regions[triptych_last] = Triptych last
+
+regions[footer_firstcolumn] = Footer first column
+regions[footer_secondcolumn] = Footer second column
+regions[footer_thirdcolumn] = Footer third column
+regions[footer_fourthcolumn] = Footer fourth column
+regions[footer] = Footer
+
+settings[shortcut_module_link] = 0
+

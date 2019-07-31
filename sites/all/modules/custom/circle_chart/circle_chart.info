@@ -1,0 +1,6 @@
+name = Circle Chart
+description = Compare values between 2 years
+core = 7.x
+package = Chart 
+dependencies[] = chart
+

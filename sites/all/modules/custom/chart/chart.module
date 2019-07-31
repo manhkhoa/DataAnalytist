@@ -1,0 +1,13 @@
+<?php
+/**
+ * Implement Hook Menu
+ */
+function chart_menu(){
+	
+}
+
+?>
+
+
+
+

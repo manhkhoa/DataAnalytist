@@ -1,0 +1,4 @@
+name = Registration
+description = "Registration."
+package = OS
+core = 7.x

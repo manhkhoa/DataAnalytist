@@ -1,0 +1,36 @@
+var scale_domain = 1.2; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"TERBINAFINE",
+		  	"positions":{"department":{"x":596,"y":161}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":2,
+		},{
+			"name":"FLURAZEPAM",
+		  	"positions":{"department":{"x":710,"y":368}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"DIAZEPAM",
+		  	"positions":{"department":{"x":563,"y":362}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"LORAZEPAM",
+		  	"positions":{"department":{"x":807,"y":977}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"PERPHENAZINE",
+		  	"positions":{"department":{"x":799,"y":481}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

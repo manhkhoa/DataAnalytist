@@ -1,0 +1,43 @@
+var scale_domain = 1.4; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"PROTOPIC",
+		  	"positions":{"department":{"x":711,"y":200}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":2,
+		},{
+			"name":"BIOFERMIN R (STREPTOCOCCUS FAECALIS)",
+		  	"positions":{"department":{"x":273,"y":875}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"CELLCEPT",
+		  	"positions":{"department":{"x":580,"y":210}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"ZOVIRAX",
+		  	"positions":{"department":{"x":636,"y":964}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"PROGRAF",
+		  	"positions":{"department":{"x":675,"y":483}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"BACTRAMIN     (SULFAMETHOXAZOLE, TRIMETHOPRIM) GRANULE",
+		  	"positions":{"department":{"x":344,"y":298}},
+		  	"id":6,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

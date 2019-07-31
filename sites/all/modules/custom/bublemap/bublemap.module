@@ -1,0 +1,33 @@
+<?php
+/**
+ * Implement Hook Menu
+ */
+function bublemap_menu(){
+	$items = array();
+	
+	$items['buble-map'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_bubble_map',TRUE),
+		'access callback' => TRUE,
+		'file' => 'bublemap.inc',
+	);
+
+	$items['json-bubblemap'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'get_json_bubblemap',
+		'access callback' => TRUE,
+	);
+
+	return $items;
+}
+
+function get_json_bubblemap(){
+
+}
+
+?>
+
+
+
+

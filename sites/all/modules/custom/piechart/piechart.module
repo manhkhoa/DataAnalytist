@@ -1,0 +1,28 @@
+<?php
+/**
+ * Implement Hook Menu
+ */
+function piechart_menu(){
+	$items = array();
+	$items['piechart-all-pt'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_pie_chart_all_pt',TRUE),
+		'file' => 'all-pt.inc',
+		'access callback' => TRUE,
+	);
+	$items['piechart-male-pt'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_pie_chart_male_pt',TRUE),
+		'access callback' => TRUE,
+		'file' => 'male-pt.inc',
+	);
+	return $items;
+}
+
+?>
+
+
+
+

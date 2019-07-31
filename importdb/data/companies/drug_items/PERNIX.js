@@ -1,0 +1,36 @@
+var scale_domain = 1.4; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"CETIRIZINE",
+		  	"positions":{"department":{"x":562,"y":551}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.4,
+		  	"budget_2013":2,
+		},{
+			"name":"PSEUDOEPHEDRINE",
+		  	"positions":{"department":{"x":320,"y":827}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.4,
+		  	"budget_2013":2,
+		},{
+			"name":"ORAPRED",
+		  	"positions":{"department":{"x":187,"y":438}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.2,
+		  	"budget_2013":1,
+		},{
+			"name":"AUGMENTIN",
+		  	"positions":{"department":{"x":209,"y":323}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.2,
+		  	"budget_2013":1,
+		},{
+			"name":"LORTUSS DM",
+		  	"positions":{"department":{"x":815,"y":809}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.2,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

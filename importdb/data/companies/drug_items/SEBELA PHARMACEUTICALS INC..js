@@ -1,0 +1,29 @@
+var scale_domain = 0.8; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"NELARABINE",
+		  	"positions":{"department":{"x":553,"y":501}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"CYTARABINE",
+		  	"positions":{"department":{"x":772,"y":985}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"METHOTREXATE",
+		  	"positions":{"department":{"x":250,"y":889}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"HYDROCORTISONE",
+		  	"positions":{"department":{"x":40,"y":225}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

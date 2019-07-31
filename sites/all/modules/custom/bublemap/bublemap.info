@@ -1,0 +1,6 @@
+name = Bubble Map
+description = Bubble Map Module
+core = 7.x
+package = Chart
+dependencies[] = chart 
+

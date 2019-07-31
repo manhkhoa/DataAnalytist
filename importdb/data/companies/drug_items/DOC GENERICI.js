@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"MESALAZINE (MESALAZINE)",
+		  	"positions":{"department":{"x":752,"y":474}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"PANTOPRAZOLE SODIUM (PANTOPRAZOLE SODIUM)",
+		  	"positions":{"department":{"x":506,"y":714}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"LOBIVON (NEBIVOLOL)",
+		  	"positions":{"department":{"x":120,"y":327}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"CLARITHYROMYCIN",
+		  	"positions":{"department":{"x":409,"y":246}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"AMOXICILLIN TRIHYDRATE",
+		  	"positions":{"department":{"x":212,"y":426}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"PREDNISOLONE",
+		  	"positions":{"department":{"x":850,"y":249}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"VIGAMOX",
+		  	"positions":{"department":{"x":795,"y":828}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"ANTI-HIV THERAPY",
+		  	"positions":{"department":{"x":524,"y":91}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"CORNEA (TISSUE)",
+		  	"positions":{"department":{"x":440,"y":540}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"RIGHT CORNEA (TISSUE)",
+		  	"positions":{"department":{"x":322,"y":312}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

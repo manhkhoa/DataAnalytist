@@ -1,0 +1,5 @@
+name = Import data
+description = Import data to MongoDB from excel files
+core = 7.x
+package = OS 
+

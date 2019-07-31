@@ -1,0 +1,6 @@
+name = Journals Chart Drug
+description = Journals Chart Module
+core = 7.x
+package = Chart 
+dependencies[] = chart
+

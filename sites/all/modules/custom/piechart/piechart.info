@@ -1,0 +1,6 @@
+name = Pie Chart
+description = Pie Chart Module
+core = 7.x
+package = Chart
+dependencies[] = chart 
+

@@ -1,0 +1,43 @@
+var scale_domain = 1.2; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"DEXAMETHASONE (DEXAMETHASONE)",
+		  	"positions":{"department":{"x":952,"y":29}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"LANSOPRAZOLE (LANSOPRAZOLE)",
+		  	"positions":{"department":{"x":296,"y":252}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"CALCICHEW D3 (CALCIUM CARBONATE, CHOLECALCIFEROL, CHOLECALCIFEROL CONCENTRATE, COLECALCIFEROL, VITAMIN D3)",
+		  	"positions":{"department":{"x":439,"y":452}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"AMITRIPTYLINE (AMITRIPTYLINE)",
+		  	"positions":{"department":{"x":718,"y":710}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"ALENDRONATE (ALENDRONIC ACID)",
+		  	"positions":{"department":{"x":552,"y":518}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},{
+			"name":"GEMCITABINE",
+		  	"positions":{"department":{"x":621,"y":933}},
+		  	"id":6,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

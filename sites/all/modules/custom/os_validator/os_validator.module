@@ -1,0 +1,415 @@
+<?php
+
+/**
+ * Implement hook_menu
+ */
+function os_validator_menu() {
+	$items = array();
+	
+	$items['unique_email'] = array(
+		'title' => 'Check email',
+		'page callback' => 'check_unique_contact_email',
+		'page arguments' => array(1),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+
+	$items['unique_uid'] = array(
+		'page callback' => 'check_unique_user_id',
+		'page arguments' => array(1),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items['unique_uid_edit'] = array(
+		'page callback' => 'check_unique_user_id_edit',
+		'page arguments' => array(1),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items['check_email_unique_edit'] = array(
+		'title' => 'Check email',
+		'page callback' => 'check_email_unique_edit',
+		'page arguments' => array(1),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items['check_email_user_profile'] = array(
+		'title' => 'Check email',
+		'page callback' => 'check_email_user_profile',
+		'page arguments' => array(1),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items['check_email_unique'] = array(
+		'title' => 'Check email',
+		'page callback' => 'check_email_unique',
+		'page arguments' => array(1),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items['check_email_unique_users'] = array(
+		'title' => 'Check email',
+		'page callback' => 'check_email_unique_users',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+
+	return $items;
+}
+
+
+/**
+ * Implement Hook Form Alter
+ * Form : Establishment, Contact...
+ * Check input data
+ */
+function os_validator_form_alter(&$form, &$form_state,$form_id){
+	global $base_url,$user;
+
+	drupal_add_js(drupal_get_path('module', 'os_validator').'/js/jquery.validationEngine.js', array('weight' => 4));
+	drupal_add_js(drupal_get_path('module', 'os_validator').'/js/jquery.validationEngine-en.js', array('weight' => 3 ));
+	drupal_add_js(drupal_get_path('module', 'os_validator').'/js/os_validator.js', array('weight' => 5));
+	
+	
+	drupal_add_css(drupal_get_path('module', 'os_validator').'/css/customMessages.css');
+	drupal_add_css(drupal_get_path('module', 'os_validator').'/css/dd.css');
+	drupal_add_css(drupal_get_path('module', 'os_validator').'/css/sprite.css');
+	drupal_add_css(drupal_get_path('module', 'os_validator').'/css/flags.css');
+	drupal_add_css(drupal_get_path('module', 'os_validator').'/css/sample.css');
+	drupal_add_css(drupal_get_path('module', 'os_validator').'/css/template.css');
+	drupal_add_css(drupal_get_path('module', 'os_validator').'/css/validationEngine.jquery.css');
+	
+	
+	
+	if($form_id == 'application_node_form'){
+		// Validate form establishment and register
+		$form['node_current_id'] = array(
+				'#type' => 'hidden',
+				'#size' => 20,
+				'#default_value' => arg(1),
+				'#attributes' => array('id' => 'node_current'),
+		);
+
+		$form['form_type'] = array(
+				'#type' => 'hidden',
+				'#size' => 20,
+				'#default_value' => arg(2),
+				'#attributes' => array('id' => 'form-type'),
+		);
+
+		
+		if($user->roles[1]){ // With anonymous
+
+			$form['field_contact_name'][LANGUAGE_NONE][0]['value']['#attributes']['class'][] = 'validate[required]';			
+
+			$form['field_contact_email'][LANGUAGE_NONE][0]['value']['#attributes']['class'][] = 'validate[required, custom[email], ajax[ajax_check_unique_email]]';
+
+			$form['field_user_id'][LANGUAGE_NONE][0]['value']['#attributes']['class'][] = 'validate[required, custom[onlyLetterNumber], funcCall[check_lenght_user_id], ajax[ajax_unique_uid]]';
+			
+			$form['actions']['submit']['#value'] = t('Submit');
+			$form['actions']['submit']['#attributes'] = array(
+				'class' => array('btn','btn-danger'),
+			);
+
+			$form['actions']['submit']['#submit']['0'] = '_custom_node_form_submit';
+			
+		} elseif ($user->roles[3] && is_numeric(arg(1))) {
+			# edit form
+			$form['field_contact_name'][LANGUAGE_NONE][0]['value']['#attributes']['class'][] = 'validate[required]';			
+
+			$form['field_contact_email'][LANGUAGE_NONE][0]['value']['#attributes']['class'][] = 'validate[required, custom[email], ajax[ajax_check_unique_email_edit]]';
+
+			$form['field_user_id'][LANGUAGE_NONE][0]['value']['#attributes']['class'][] = 'validate[required, custom[onlyLetterNumber], funcCall[check_lenght_user_id], ajax[ajax_unique_uid_edit]]';
+			
+			$form['actions']['submit']['#value'] = t('Submit');
+			$form['actions']['submit']['#attributes'] = array(
+				'class' => array('btn','btn-danger'),
+			);
+
+			drupal_add_js(drupal_get_path('module', 'os_validator').'/js/confirm_registration.js', array('weight' => 6));
+
+		}
+
+		$form['actions']['submit']['#suffix'] = '<a href="'.$base_url.'" class="link-cancel btn-danger btn">'.t("Cancel").'</a>';
+				
+	}
+	
+	return $form;
+}
+
+// Alter submit form
+function _custom_node_form_submit($form, &$form_state){
+  $node = node_form_submit_build_node($form, $form_state);
+  $insert = empty($node->nid);
+  node_save($node);
+  $node_link = l(t('view'), 'node/' . $node->nid);
+  $watchdog_args = array(
+    '@type' => $node->type,
+    '%title' => $node->title,
+  );
+  $t_args = array(
+    '@type' => node_type_get_name($node),
+    '%title' => $node->title,
+  );
+
+  if ($insert) {
+    watchdog('content', '@type: added %title.', $watchdog_args, WATCHDOG_NOTICE, $node_link);\
+    drupal_set_message();
+    drupal_set_message(t('Your application is currently under review and you will receive an email with instructions on the next steps.', $t_args));
+  }
+  else {
+    watchdog('content', '@type: updated %title.', $watchdog_args, WATCHDOG_NOTICE, $node_link);
+    drupal_set_message(t('%title has been updated.', $t_args));
+  }
+  if ($node->nid) {
+    $form_state['values']['nid'] = $node->nid;
+    $form_state['nid'] = $node->nid;
+    $form_state['redirect'] = 'node/' . $node->nid;
+  }
+  else {
+    // In the unlikely case something went wrong on save, the node will be
+    // rebuilt and node form redisplayed the same way as in preview.
+    drupal_set_message(t('The post could not be saved.'), 'error');
+    $form_state['rebuild'] = TRUE;
+  }
+  // Clear the page and block caches.
+  cache_clear_all();
+}
+
+
+/**
+ * Check Unique User ID
+ */
+function check_unique_user_id(){
+	/* RECEIVE VALUE */
+	$validateValue=$_REQUEST['fieldValue'];
+	$validateId=$_REQUEST['fieldId'];
+	$nid = $_REQUEST['node_current'];
+	$form_type = $_REQUEST['form-type'];
+	$arrayToJs = array();
+	$arrayToJs[0] = $validateId;
+
+	/* RETURN VALUE */
+	$arrayToJs = array();
+	$arrayToJs[0] = $validateId;	
+	
+	$query = db_select('node', 'n');
+	$query->join('field_data_field_user_id', 'uid', 'n.nid = uid.entity_id');
+	$query->fields('uid',array('field_user_id_value'));
+	$query->condition('uid.field_user_id_value',$validateValue,'=');
+	$query->condition('n.status', 1,'=');
+	$query->condition('n.type', 'application','=');
+	$results = $query->execute()->fetchAll();
+
+	$query_user = db_select('users', 'user');
+	$query_user->fields('user',array('name'));
+	// $query_user->condition('user.status', 1,'=');
+	$query_user->condition('user.name', $validateValue,'=');
+	$result_user = $query_user->execute()->fetchAll();
+	
+	if(count($results) > 0 || count($result_user) > 0){
+		$arrayToJs[1] = false;
+	} else{
+		$arrayToJs[1] = true;
+	}
+
+	echo json_encode($arrayToJs);	
+}
+
+/**
+ * Check Unique User ID in Edit form
+ */
+function check_unique_user_id_edit(){
+	/* RECEIVE VALUE */
+	$validateValue=$_REQUEST['fieldValue'];
+	$validateId=$_REQUEST['fieldId'];
+	$nid = $_REQUEST['node_current'];
+	$form_type = $_REQUEST['form-type'];
+	$arrayToJs = array();
+	$arrayToJs[0] = $validateId;
+
+	/* RETURN VALUE */
+	$arrayToJs = array();
+	$arrayToJs[0] = $validateId;	
+	
+	$query = db_select('node', 'n');
+	$query->join('field_data_field_user_id', 'uid', 'n.nid = uid.entity_id');
+	$query->fields('uid',array('field_user_id_value'));
+	$query->condition('uid.field_user_id_value',$validateValue,'=');
+	$query->condition('n.status', 1,'=');
+	$query->condition('n.type', 'application','=');
+	$results = $query->execute()->fetchAll();
+
+	$query_user = db_select('users', 'user');
+	$query_user->fields('user',array('name'));
+	// $query_user->condition('user.status', 1,'=');
+	$query_user->condition('user.name', $validateValue,'=');
+	$result_user = $query_user->execute()->fetchAll();
+	
+	if(count($results) > 1 || count($result_user) > 0){
+		$arrayToJs[1] = false;
+	} else{
+		$arrayToJs[1] = true;
+	}
+
+	echo json_encode($arrayToJs);	
+}
+
+
+/**
+ * Check Unique Email Value when create user
+ */
+function check_email_unique_users(){
+	/* RECEIVE VALUE */
+	$validateValue=$_REQUEST['fieldValue'];
+	$validateId=$_REQUEST['fieldId'];
+
+	/* RETURN VALUE */
+	$arrayToJs = array();
+	$arrayToJs[0] = $validateId;	
+
+	// Email of users table
+	$query_user = db_select('users', 'user');
+	$query_user->fields('user',array('mail'));
+	// $query_user->condition('user.status', 1,'=');
+	$query_user->condition('user.mail', $validateValue,'=');
+	$result_user = $query_user->execute()->fetchAll();
+	
+	$number_user = count($result_user);
+
+	if ($number_user > 0){
+		$check = false;
+	}else{
+		$check = true;
+	}	
+
+	$arrayToJs[1] = $check;			
+	echo json_encode($arrayToJs);			
+	
+}
+
+/**
+ * Check Unique Email Value when create Registration
+ */
+function check_email_unique(){
+	/* RECEIVE VALUE */
+	$validateValue=$_REQUEST['fieldValue'];
+	$validateId=$_REQUEST['fieldId'];
+
+	/* RETURN VALUE */
+	$arrayToJs = array();
+	$arrayToJs[0] = $validateId;
+	
+	// Email in Registration
+	$query_reg = db_select('node', 'n');
+	$query_reg->join('field_data_field_contact_email', 'email', 'n.nid = email.entity_id');
+	$query_reg->fields('email',array('field_contact_email_value'));
+	$query_reg->condition('email.field_contact_email_value',$validateValue,'=');
+	// $query_reg->condition('n.status', 1,'=');
+	$result_reg = $query_reg->execute()->fetchAll();
+
+	// Email of admin and cniadmin
+	$query_user = db_select('users', 'user');
+	$query_user->fields('user',array('mail'));
+	// $query_user->condition('user.status', 1,'=');
+	$query_user->condition('user.mail', $validateValue,'=');
+	$result_user = $query_user->execute()->fetchAll();
+
+	$count_reg = count($result_reg);
+	$count_user = count($result_user);
+
+	$number_user = $count_reg + $count_user;
+
+	if ($number_user > 0){
+		$check = false;
+	}else{
+		$check = true;
+	}	
+
+	$arrayToJs[1] = $check;			
+	echo json_encode($arrayToJs);			
+	
+}
+
+/**
+ * Check Unique Email Value when edit Registration
+ */
+function check_email_unique_edit(){
+	/* RECEIVE VALUE */
+	$validateValue=$_REQUEST['fieldValue'];
+	$validateId=$_REQUEST['fieldId'];
+
+	/* RETURN VALUE */
+	$arrayToJs = array();
+	$arrayToJs[0] = $validateId;
+	
+	// Email in Registration
+	$query_reg = db_select('node', 'n');
+	$query_reg->join('field_data_field_contact_email', 'email', 'n.nid = email.entity_id');
+	$query_reg->fields('email',array('field_contact_email_value'));
+	$query_reg->condition('email.field_contact_email_value',$validateValue,'=');
+	// $query_reg->condition('n.status', 1,'=');
+	$result_reg = $query_reg->execute()->fetchAll();
+	
+	// Email of admin
+	$query_user = db_select('users', 'user');
+	$query_user->fields('user',array('mail'));
+	// $query_user->condition('user.status', 1,'=');
+	$query_user->condition('user.mail', $validateValue,'=');
+	$result_user = $query_user->execute()->fetchAll();
+
+	$count_reg = count($result_reg);
+	$count_user = count($result_user);
+
+	$number_user = $count_reg + $count_user;
+
+	if ($number_user > 1){
+		$check = false;
+	}else{
+		$check = true;
+	}	
+
+	$arrayToJs[1] = $check;			
+	echo json_encode($arrayToJs);
+}
+
+/**
+ * Check Unique Email Value when edit Registration
+ */
+function check_email_user_profile(){
+	/* RECEIVE VALUE */
+	$validateValue=$_REQUEST['fieldValue'];
+	$validateId=$_REQUEST['fieldId'];
+
+	/* RETURN VALUE */
+	$arrayToJs = array();
+	$arrayToJs[0] = $validateId;
+	
+	
+	// Email of admin and cniadmin
+	$query_user = db_select('users', 'user');
+	$query_user->fields('user',array('mail'));
+	// $query_user->condition('user.status', 1,'=');
+	$query_user->condition('user.mail', $validateValue,'=');
+	$result_user = $query_user->execute()->fetchAll();
+
+	$number_user = count($result_user);
+	if ($number_user > 1){
+		$check = false;
+	}else{
+		$check = true;
+	}	
+
+	$arrayToJs[1] = $check;			
+	echo json_encode($arrayToJs);
+}
+
+
+?>

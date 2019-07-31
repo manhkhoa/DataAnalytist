@@ -1,0 +1,29 @@
+var scale_domain = 1.2; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"Jantoven",
+		  	"positions":{"department":{"x":668,"y":28}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":1,
+		  	"budget_2013":3,
+		},{
+			"name":"Prevalite",
+		  	"positions":{"department":{"x":368,"y":848}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"TRAMADOL",
+		  	"positions":{"department":{"x":185,"y":946}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},{
+			"name":"TOPAMAX",
+		  	"positions":{"department":{"x":897,"y":768}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.333333333333,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

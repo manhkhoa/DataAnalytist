@@ -1,0 +1,36 @@
+var scale_domain = 1; var nytg = nytg || {};nytg.budget_array_data = [{
+			"name":"PACLITAXEL",
+		  	"positions":{"department":{"x":993,"y":793}},
+		  	"id":1,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"GRANULOCYTE COLONY STIMULATING FACTOR (GRANULOCYTE COLONY STIMULATING FACTOR)",
+		  	"positions":{"department":{"x":444,"y":41}},
+		  	"id":2,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"IRINOTECAN",
+		  	"positions":{"department":{"x":247,"y":786}},
+		  	"id":3,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"FLUOROURACIL",
+		  	"positions":{"department":{"x":635,"y":273}},
+		  	"id":4,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},{
+			"name":"OXALIPLATIN",
+		  	"positions":{"department":{"x":45,"y":397}},
+		  	"id":5,
+		  	"budget_2012":1,
+		  	"change":0.5,
+		  	"budget_2013":1,
+		},];nytg.category_list = [];nytg.category_data = [];

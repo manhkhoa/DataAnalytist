@@ -1,0 +1,31 @@
+<?php
+/**
+ * Implement Hook Menu
+ */
+function graphic_chart_menu(){
+	$items = array();
+	
+	$items['graphic-chart'] = array(
+		'type' => MENU_CALLBACK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('get_graphic_chart',TRUE),
+		'access callback' => TRUE,
+		'file' => 'graphic.inc',
+		'title' => 'Graphic Chart'
+	);
+	
+	return $items;
+}
+
+
+/**
+ * Get data and store in json file
+ */
+function graphic_getdata(){
+	global $base_url;
+
+	$url = drupal_get_path('module','chart').'/connect-mongodb.php';
+	include_once($url);
+	$db = getDB();
+
+}

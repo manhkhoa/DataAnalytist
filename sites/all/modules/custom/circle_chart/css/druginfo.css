@@ -1,0 +1,16 @@
+#get-drug-info {
+	width: 100%;
+	border: 1px solid #bbb;
+	padding: 10px;
+}
+.content_search_drug{float: left;}
+.drug_content{
+	float: left;
+	width: 100%;
+}
+.drug_image{float: left;width: 40%;}
+.drug_image img{width: auto;height: 100px !important;}
+
+span.down-load-spl {
+	padding-left: 0px;
+}

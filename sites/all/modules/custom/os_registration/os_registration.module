@@ -1,0 +1,186 @@
+<?php
+
+/**
+ * Create new user and addressbook 
+ */
+function os_registration_node_presave($node){
+	global $user, $base_url, $language;
+	if($node->type == "application"){
+		$nid = $node->nid;
+		$status = $node->field_application_status['und']['0']['value'];
+		$field_contact_email = $node->field_contact_email['und']['0']['value'];
+
+		// Prevent approve registration if email was registered in system.
+		$query = db_select('field_data_field_contact_email', 'email');
+		$query->fields('email',array('field_contact_email_value'));
+		$query->condition('email.field_contact_email_value', $field_contact_email,'='); 
+		$results = $query->execute()->fetchAll();
+		$count = count($results);		
+		
+		if(is_numeric($nid) && $status == 'approved'){	
+			
+			// Get information from registration node
+			$field_contact_phone = $node->field_contact_phone['und']['0']['value'];
+
+			
+			// Contact Address
+			$contact_add = $node->field_contact_address['und']['0']['thoroughfare'];
+			$contact_city = $node->field_contact_address['und']['0']['locality'];
+			$contact_state = $node->field_contact_address['und']['0']['administrative_area'];
+			$contact_postcode = $node->field_contact_address['und']['0']['postal_code'];
+			$contact_country = $node->field_contact_address['und']['0']['country'];
+			
+			$field_contact_email = $node->field_contact_email['und']['0']['value'];
+			$field_contact_name = $node->field_contact_name['und']['0']['value'];
+
+			$field_remark = $node->field_remark['und']['0']['value'];
+			$field_user_id = $node->field_user_id['und']['0']['value'];
+			
+
+			// Create new user
+			$new_user = array(
+				'name' => $field_user_id,
+				'mail' => $field_contact_email,
+				'status' => 1,
+				'init' => $field_contact_email,
+				'roles' => array('4' => 'Normal User'),
+			);
+
+
+			try{
+				user_save(null, $new_user);
+
+				// Get user id
+				$query = db_select('users','u');
+				$query->fields('u', array('uid'));
+				$query->condition('u.mail', $field_contact_email, '=');
+				$result = $query->execute();
+				$result = $result->fetchAll();
+				$uid =  $result[0]->uid; // id of new user
+
+				$new_acc = user_load($uid);
+				$link = user_pass_reset_url($new_acc);
+
+
+				// Send email to new user
+				$signature = get_email_signature();
+				
+				$from = variable_get('site_mail', ini_get('sendmail_from'));
+				$site_name = variable_get('site_name', '');
+				$headers = 'MIME-Version: 1.0' . "\r\n".
+				'Content-Type: text/html; charset=UTF-8' ."\r\n".
+				'X-Priority: 1 '."\r\n".
+				'From: ODA Support <'.$from.'>'. "\r\n" .
+				'Reply-To: '.$from . "\r\n" .
+				'X-Mailer: PHP/' . phpversion();
+
+				$subject = "Account for ".$field_contact_name." - has been activated."; // subject of e-mail
+				
+				// Main content
+				$email_content = 'Mail content.<br><br>';
+				
+				$body = "Your application for registration has been approved. Please use the one time activation link below, to activate your account.<br><br>
+					Link: <a href='".$link."'>".$link."</a><br><br>
+					".$email_content."
+					As always, never hesitate to ask us questions!<br><br>
+					Thanks,<br><br>
+					".$signature;
+				
+				// mail($field_contact_email, $subject, $body, $headers);
+				os_core_send_mail($from, 'ODA Support', $field_contact_email, $field_contact_name, $subject, $body);
+
+			} catch (Exception $e){
+				drupal_set_message(t('There was an error while creating the user.  If the problem continues to persist,  contact support@oda.pexous.com'), 'error');
+			}
+
+						
+		} else if(is_numeric($nid) && $status == 'pending'){	
+			$node->status = 1;
+			if($count > 0){
+				drupal_set_message(t('This email exists in our database. You might have already registered with us. Please login with your credentials or contact customer support.'), 'warning');
+				drupal_goto('register');
+			}
+		} else if(is_numeric($nid) && $status == 'denied'){
+			// Send email when admin deny a registration
+			$field_contact_email = $node->field_contact_email['und']['0']['value'];
+			$signature = get_email_signature();
+			$field_user_id = $node->field_user_id['und']['0']['value'];
+			$field_contact_name = $node->field_contact_name['und']['0']['value'];
+			$field_remark = $node->field_remark['und']['0']['value'];
+				
+			$from = 'support@oda.pexous.com';
+			$site_name = variable_get('site_name', '');
+			$headers = 'MIME-Version: 1.0' . "\r\n".
+			'Content-Type: text/html; charset=UTF-8' ."\r\n".
+			'X-Priority: 1 '."\r\n".
+			'From: ODA Support <'.$from.'>'. "\r\n" .
+			'Reply-To: '.$from . "\r\n" .
+			'X-Mailer: PHP/' . phpversion();
+
+			$subject = "Account For ".$field_company_name." / ".$field_user_id." At ".$site_name." has been denied."; // subject of e-mail			
+				
+
+			$body = "Dear ".$field_contact_name."<br><br>
+				Your application for registration has been denied for the following reasons<br><br>
+				".$field_remark."<br><br>
+				As always, never hesitate to ask us questions!<br><br>
+				Thanks,<br><br>
+				".$signature;
+			
+			// mail($field_contact_email, $subject, $body, $headers);
+			os_core_send_mail($from, 'ODA Support', $field_contact_email, $field_contact_name, $subject, $body);
+
+		} else if(!is_numeric($nid)) {	
+			if($count > 0){
+				drupal_set_message(t('This email exists in our database. You might have already registered with us. Please login with your credentials or contact customer support.'), 'warning');
+				drupal_goto('register');
+			}
+	
+
+			// Send email when user register
+			$signature = get_email_signature();
+			$field_company_name = $node->field_company_name['und']['0']['value'];
+			$field_user_id = $node->field_user_id['und']['0']['value'];
+			$field_contact_name = $node->field_contact_name['und']['0']['value'];
+				
+			$from = 'support@oda.pexous.com';
+			$site_name = variable_get('site_name', '');
+			$headers = 'MIME-Version: 1.0' . "\r\n".
+			'Content-Type: text/html; charset=UTF-8' ."\r\n".
+			'X-Priority: 1 '."\r\n".
+			'From: ODA Support <'.$from.'>'. "\r\n" .
+			'Reply-To: '.$from . "\r\n" .
+			'X-Mailer: PHP/' . phpversion();
+
+			$subject = "Account For ".$field_user_id." At ".$site_name." is Pending Review"; // subject of e-mail	
+
+			$body = "Dear ".$field_contact_name."<br><br>
+				This is mail content<br><br>
+				Thanks,<br><br>
+				".$signature;
+			
+			// mail($field_contact_email, $subject, $body, $headers);
+			os_core_send_mail($from, 'ODA Support', $field_contact_email, $field_contact_name, $subject, $body);
+			
+		} else {
+			if($count > 0){
+				drupal_set_message(t('This email exists in our database. You might have already registered with us. Please login with your credentials or contact customer support.'), 'warning');
+				drupal_goto('register');
+			}
+		}
+		
+	}
+} // End Function
+
+
+/**
+ * Set email signature and return as a string
+ */
+function get_email_signature(){
+	global $base_url;
+
+	$signature = '<div>This is signature.</div>';
+
+	return $signature;
+}
+
